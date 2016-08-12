@@ -2,25 +2,26 @@
 
 namespace NotificationChannels\Pushover\Exceptions;
 
+use Exception;
 use Psr\Http\Message\ResponseInterface;
 
-class CouldNotSendNotification extends \Exception
+class CouldNotSendNotification extends Exception
 {
     public static function serviceRespondedWithAnError(ResponseInterface $response)
     {
         $statusCode = $response->getStatusCode();
 
-        if ($result = json_decode($response->getBody())) {
-            if (isset($result->message)) {
-                return new static('Pushover responded with an error ('.$statusCode.'): '.$result->message);
-            }
+        $result = json_decode($response->getBody());
+
+        if ($result && isset($result->message)) {
+            return new static('Pushover responded with an error (' . $statusCode . '): ' . $result->message);
         }
 
-        return new static('Pushover responded with an error ('.$statusCode.').');
+        return new static('Pushover responded with an error (' . $statusCode . ').');
     }
 
-    public static function serviceCommunicationError()
+    public static function serviceCommunicationError(Exception $exception)
     {
-        return new static("The communication with Pushover failed.");
+        return new static("The communication with Pushover failed because `{$exception->getCode()} - {$exception->getMessage()}`");
     }
 }

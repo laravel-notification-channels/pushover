@@ -5,7 +5,7 @@ namespace NotificationChannels\Pushover\Test;
 use App\Channels\PushoverMessage;
 use Illuminate\Notifications\Notification;
 use Mockery;
-use NotificationChannels\Pushover\Channel;
+use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\Pushover;
 use GuzzleHttp\Client as HttpClient;
 use PHPUnit_Framework_TestCase;
@@ -54,14 +54,14 @@ class IntegrationTest extends PHPUnit_Framework_TestCase
 
         $pushover = new Pushover($this->guzzleClient, 'application-token');
 
-        $channel = new Channel($pushover);
+        $channel = new PushoverChannel($pushover);
 
         $this->notification->shouldReceive('toPushover')->andReturn($message);
 
         $channel->send(new Notifiable, $this->notification);
     }
 
-    private function requestWillBeSentToPushoverWith($params)
+    protected function requestWillBeSentToPushoverWith($params)
     {
         $this->guzzleClient->shouldReceive('post')
             ->with('https://api.pushover.net/1/messages.json', [
@@ -69,7 +69,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase
             ]);
     }
 
-    private function ignoreEvents()
+    protected function ignoreEvents()
     {
         $dispatcher = Mockery::mock('Illuminate\Contracts\Events\Dispatcher');
         $dispatcher->shouldReceive('fire');

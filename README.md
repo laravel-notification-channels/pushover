@@ -36,7 +36,7 @@ You must install the service provider:
 // config/app.php
 'providers' => [
     ...
-    NotificationChannels\Pushover\Provider::class,
+    NotificationChannels\Pushover\PushoverServiceProvider::class,
 ];
 ```
 
@@ -71,7 +71,7 @@ class AccountApproved extends Notification
 
     public function toPushover($notifiable)
     {
-        return (new PushoverMessage('The invoice has been paid.'))
+        return new PushoverMessage::create('The invoice has been paid.')
             ->title('Invoice paid')
             ->sound('incoming')
             ->lowPriority()

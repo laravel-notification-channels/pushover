@@ -5,7 +5,7 @@ namespace NotificationChannels\Pushover;
 use Carbon\Carbon;
 use NotificationChannels\Pushover\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
 
-class Message
+class PushoverMessage
 {
     /**
      * The text content of the message.
@@ -82,11 +82,19 @@ class Message
     const EMERGENCY_PRIORITY = 2;
 
     /**
-     * Construct PushoverMessage.
+     * @param  string $content
      *
+     * @return static
+     */
+    public static function create($content = '')
+    {
+        return new static($content);
+    }
+
+    /**
      * @param  string  $content
      */
-    public function __construct($content = null)
+    public function __construct($content = '')
     {
         $this->content = $content;
     }

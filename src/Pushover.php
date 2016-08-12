@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Pushover;
 
+use Exception;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
 use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
@@ -29,14 +30,13 @@ class Pushover {
     protected $token;
 
     /**
-     * Pushover constructor.
-     *
      * @param  HttpClient  $http
-     * @param  $token
+     * @param  string $token
      */
     public function __construct(HttpClient $http, $token)
     {
         $this->http = $http;
+
         $this->token = $token;
     }
 
@@ -54,10 +54,10 @@ class Pushover {
             return $this->http->post($this->pushoverApiUrl, [
                 'form_params' => $this->paramsWithToken($params)
             ]);
-        } catch (RequestException $e) {
-            throw CouldNotSendNotification::serviceRespondedWithAnError($e->getResponse());
-        } catch (\Exception $e) {
-            throw CouldNotSendNotification::serviceCommunicationError();
+        } catch (RequestException $exception) {
+            throw CouldNotSendNotification::serviceRespondedWithAnError($exception->getResponse());
+        } catch (Exception $exception) {
+            throw CouldNotSendNotification::serviceCommunicationError($exception);
         }
     }
 

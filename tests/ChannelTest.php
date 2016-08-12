@@ -5,14 +5,14 @@ namespace NotificationChannels\Pushover\Test;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Notification;
 use Mockery;
-use NotificationChannels\Pushover\Channel;
-use NotificationChannels\Pushover\Message;
+use NotificationChannels\Pushover\PushoverChannel;
+use NotificationChannels\Pushover\PushoverMessage;
 use NotificationChannels\Pushover\Pushover;
 use PHPUnit_Framework_TestCase;
 
 class ChannelTest extends PHPUnit_Framework_TestCase
 {
-    /** @var Channel */
+    /** @var PushoverChannel */
     protected $channel;
 
     /** @var Pushover */
@@ -21,7 +21,7 @@ class ChannelTest extends PHPUnit_Framework_TestCase
     /** @var Notification */
     protected $notification;
 
-    /** @var Message */
+    /** @var PushoverMessage */
     protected $message;
 
     /** @var Dispatcher */
@@ -30,12 +30,14 @@ class ChannelTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
+
         $this->pushover = Mockery::mock(Pushover::class);
-        $this->channel = new Channel($this->pushover);
+        $this->channel = new PushoverChannel($this->pushover);
         $this->notification = Mockery::mock(Notification::class);
-        $this->message = Mockery::mock(Message::class);
+        $this->message = Mockery::mock(PushoverMessage::class);
 
         $this->events = Mockery::mock('Illuminate\Contracts\Events\Dispatcher');
+
         app()->instance('events', $this->events);
     }
 
