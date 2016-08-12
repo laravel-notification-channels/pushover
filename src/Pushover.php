@@ -7,7 +7,8 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
 use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
 
-class Pushover {
+class Pushover
+{
     /**
      * Location of the Pushover API.
      *
@@ -49,10 +50,11 @@ class Pushover {
      * @return \Psr\Http\Message\ResponseInterface
      * @throws CouldNotSendNotification
      */
-    public function send($params) {
+    public function send($params)
+    {
         try {
             return $this->http->post($this->pushoverApiUrl, [
-                'form_params' => $this->paramsWithToken($params)
+                'form_params' => $this->paramsWithToken($params),
             ]);
         } catch (RequestException $exception) {
             throw CouldNotSendNotification::serviceRespondedWithAnError($exception->getResponse());
@@ -70,8 +72,7 @@ class Pushover {
     protected function paramsWithToken($params)
     {
         return array_merge($params, [
-            'token' => $this->token
+            'token' => $this->token,
         ]);
     }
-
 }
