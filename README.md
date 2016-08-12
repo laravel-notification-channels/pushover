@@ -64,13 +64,11 @@ class AccountApproved extends Notification
 
     public function toPushover($notifiable)
     {
-        return (new PushoverMessage)
-            ->content('The invoice has been paid.')
-            ->sound('incoming')
+        return (new PushoverMessage('The invoice has been paid.'))
             ->title('Invoice paid')
-            ->highPriority()
-            ->url('http://example.com/invoices', 'Go to your invoices')
-            ->time(Carbon::now()->addHour(1));
+            ->sound('incoming')
+            ->lowPriority()
+            ->url('http://example.com/invoices', 'Go to your invoices');
     }
 }
 ```
@@ -85,8 +83,19 @@ public function routeNotificationForPushover()
 ```
 
 ### Available Message methods
+Please note that only the message content is mandatory, all other methods are optional. The message content can be set via `content('')` or via the constructor `new Message('')`.
 
-TODO
+- `content($message)`: Accepts a string value for the message text.
+- `title($title)`: Accepts a string value for the message title.
+- `time($timestamp)`: Accepts either a `Carbon` object or an UNIX timestamp.
+- `url($url[, $title])`: Accepts a string value for a [supplementary url](https://pushover.net/api#urls) and an optional string value for the title of the url.
+- `sound($sound)`: Accepts a string value for the [notification sound](https://pushover.net/api#sounds).
+- `priority($priority[, $retryTimeout, $expireAfter])`: Accepts an integer value for the priority and, when the priority is set to emergency, also an integer value for the retry timeout and expiry time (in seconds). Priority values are available as constants: `LOWEST_PRIORITY`, `LOW_PRIORITY`, `NORMAL_PRIORITY` and `EMERGENCY_PRIORITY`.
+- `lowestPriority()`: Sets the priority to the lowest priority.
+- `lowPriority()`: Sets the priority to low.
+- `normalPriority()`: Sets the priority to normal.
+- `highPriority()`: Sets the priority to high.
+- `emergencyPriority($retryTimeout, $expireAfter)`: Sets the priority to emergency and accepts integer values for the retry timeout and expiry time (in seconds).
 
 
 ## Changelog
