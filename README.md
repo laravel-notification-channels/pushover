@@ -59,8 +59,8 @@ Add the generated Pushover application token to the services config file:
 Now you can use the channel in your `via()` method inside the notification as well as send a push notification:
 
 ``` php
-use NotificationChannels\Pushover\Channel as PushoverChannel;
-use NotificationChannels\Pushover\Message as PushoverMessage;
+use NotificationChannels\Pushover\PushoverChannel;
+use NotificationChannels\Pushover\PushoverMessage;
 use Illuminate\Notifications\Notification;
 
 class AccountApproved extends Notification
@@ -72,7 +72,7 @@ class AccountApproved extends Notification
 
     public function toPushover($notifiable)
     {
-        return new PushoverMessage::create('The invoice has been paid.')
+        return PushoverMessage::create('The invoice has been paid.')
             ->title('Invoice paid')
             ->sound('incoming')
             ->lowPriority()
@@ -91,7 +91,7 @@ public function routeNotificationForPushover()
 ```
 
 ### Available Message methods
-Please note that only the message content is mandatory, all other methods are optional. The message content can be set via `content('')` or via the constructor `new Message('')`.
+Please note that only the message content is mandatory, all other methods are optional. The message content can be set via `content('')`, via the create method `PushoverMessage::create('')` or via the constructor `new PushoverMessage('')`.
 
 - `content($message)`: Accepts a string value for the message text.
 - `title($title)`: Accepts a string value for the message title.
