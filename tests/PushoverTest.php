@@ -58,8 +58,7 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_pushover_returns_an_error_with_invalid_json()
     {
-        $this->expectException(CouldNotSendNotification::class);
-        $this->expectExceptionMessage('Pushover responded with an error (400).');
+        $this->setExpectedException(CouldNotSendNotification::class, 'Pushover responded with an error (400).');
 
         $guzzleRequest = Mockery::mock(\Psr\Http\Message\RequestInterface::class);
         $guzzleResponse = Mockery::mock(\Psr\Http\Message\ResponseInterface::class);
@@ -74,8 +73,7 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_pushover_returns_an_error_with_valid_json()
     {
-        $this->expectException(CouldNotSendNotification::class);
-        $this->expectExceptionMessage('Pushover responded with an error (400): [error_message]');
+        $this->setExpectedException(CouldNotSendNotification::class, 'Pushover responded with an error (400): [error_message]');
 
         $guzzleRequest = Mockery::mock(\Psr\Http\Message\RequestInterface::class);
         $guzzleResponse = Mockery::mock(\Psr\Http\Message\ResponseInterface::class);
@@ -90,8 +88,7 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_an_unknown_communication_error_occurred()
     {
-        $this->expectException(CouldNotSendNotification::class);
-        $this->expectExceptionMessage('The communication with Pushover failed');
+        $this->setExpectedException(CouldNotSendNotification::class, 'The communication with Pushover failed');
 
         $this->guzzleClient->shouldReceive('post')->andThrow(new Exception);
 
