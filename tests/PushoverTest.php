@@ -87,7 +87,6 @@ class PushoverTest extends PHPUnit_Framework_TestCase
         $this->pushover->send([]);
     }
 
-
     /** @test */
     public function it_throws_an_exception_when_an_unknown_communication_error_occurred()
     {
@@ -98,5 +97,4 @@ class PushoverTest extends PHPUnit_Framework_TestCase
 
         $this->pushover->send([]);
     }
-
 }
