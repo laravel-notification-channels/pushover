@@ -91,7 +91,7 @@ class PushoverTest extends PHPUnit_Framework_TestCase
     public function it_throws_an_exception_when_an_unknown_communication_error_occurred()
     {
         $this->expectException(CouldNotSendNotification::class);
-        $this->expectExceptionMessage('The communication with Pushover failed.');
+        $this->expectExceptionMessage('The communication with Pushover failed');
 
         $this->guzzleClient->shouldReceive('post')->andThrow(new Exception);
 
