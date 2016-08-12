@@ -1,10 +1,10 @@
 <?php
 
-namespace NotificationChannels\PusherPushNotifications\Test;
+namespace NotificationChannels\Pushover\Test;
 
 use Carbon\Carbon;
-use NotificationChannels\PushoverNotifications\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
-use NotificationChannels\PushoverNotifications\Message;
+use NotificationChannels\Pushover\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
+use NotificationChannels\Pushover\Message;
 use PHPUnit_Framework_TestCase;
 
 class MessageTest extends PHPUnit_Framework_TestCase

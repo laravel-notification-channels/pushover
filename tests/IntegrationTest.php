@@ -1,12 +1,16 @@
 <?php
 
+namespace NotificationChannels\Pushover\Test;
+
 use App\Channels\PushoverMessage;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\PushoverNotifications\Channel;
-use NotificationChannels\PushoverNotifications\Pushover;
+use Mockery;
+use NotificationChannels\Pushover\Channel;
+use NotificationChannels\Pushover\Pushover;
 use GuzzleHttp\Client as HttpClient;
+use PHPUnit_Framework_TestCase;
 
-class PushoverTest extends PHPUnit_Framework_TestCase
+class IntegrationTest extends PHPUnit_Framework_TestCase
 {
     /** @var HttpClient */
     protected $guzzleClient;
@@ -72,13 +76,4 @@ class PushoverTest extends PHPUnit_Framework_TestCase
         app()->instance('events', $dispatcher);
     }
 
-}
-
-
-class Notifiable
-{
-    public function routeNotificationFor($channel)
-    {
-        return 'pushover-key';
-    }
 }

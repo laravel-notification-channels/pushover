@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\PushoverNotifications;
+namespace NotificationChannels\Pushover;
 
 use GuzzleHttp\Client as HttpClient;
 use Illuminate\Support\ServiceProvider;

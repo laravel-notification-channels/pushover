@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\PushoverNotifications\Exceptions;
+namespace NotificationChannels\Pushover\Exceptions;
 
 use Psr\Http\Message\ResponseInterface;
 

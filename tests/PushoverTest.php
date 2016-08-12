@@ -1,12 +1,12 @@
 <?php
 
-namespace NotificationChannels\PusherPushNotifications\Test;
+namespace NotificationChannels\Pushover\Test;
 
 use Exception;
 use GuzzleHttp\Exception\RequestException;
 use Mockery;
-use NotificationChannels\PushoverNotifications\Exceptions\CouldNotSendNotification;
-use NotificationChannels\PushoverNotifications\Pushover;
+use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
+use NotificationChannels\Pushover\Pushover;
 use GuzzleHttp\Client as HttpClient;
 use PHPUnit_Framework_TestCase;
 

@@ -20,7 +20,7 @@ This package makes it easy to send Pushover notifications with Laravel 5.3.
 You can install the package via composer:
 
 ``` bash
-composer require laravel-notification-channels/pushover-notifications
+composer require laravel-notification-channels/pushover
 ```
 
 You must install the service provider:
@@ -29,7 +29,7 @@ You must install the service provider:
 // config/app.php
 'providers' => [
     ...
-    NotificationChannels\PushoverNotifications\Provider::class,
+    NotificationChannels\Pushover\Provider::class,
 ];
 ```
 
@@ -51,8 +51,8 @@ Add the generated Pushover application token to the services config file:
 Now you can use the channel in your `via()` method inside the notification as well as send a push notification:
 
 ``` php
-use NotificationChannels\PushoverNotifications\Channel as PushoverChannel;
-use NotificationChannels\PushoverNotifications\Message as PushoverMessage;
+use NotificationChannels\Pushover\Channel as PushoverChannel;
+use NotificationChannels\Pushover\Message as PushoverMessage;
 use Illuminate\Notifications\Notification;
 
 class AccountApproved extends Notification

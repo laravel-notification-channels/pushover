@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\PushoverNotifications\Exceptions;
+namespace NotificationChannels\Pushover\Exceptions;
 
 class EmergencyNotificationRequiresRetryAndExpire extends \Exception {
 

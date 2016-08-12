@@ -1,7 +1,7 @@
 {
-    "name": "laravel-notification-channels/pushover-notifications",
+    "name": "laravel-notification-channels/pushover",
     "description": "Pushover notifications for Laravel.",
-    "homepage": "https://github.com/laravel-notification-channels/pushover-notifications",
+    "homepage": "https://github.com/laravel-notification-channels/pushover",
     "license": "MIT",
     "authors": [
         {
@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NotificationChannels\\PushoverNotifications\\": "src"
+            "NotificationChannels\\Pushover\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NotificationChannels\\PushoverNotifications\\Test\\": "tests"
+            "NotificationChannels\\Pushover\\Test\\": "tests"
         }
     },
     "scripts": {

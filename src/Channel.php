@@ -1,9 +1,9 @@
 <?php
 
-namespace NotificationChannels\PushoverNotifications;
+namespace NotificationChannels\Pushover;
 
-use NotificationChannels\PushoverNotifications\Events\MessageWasSent;
-use NotificationChannels\PushoverNotifications\Events\SendingMessage;
+use NotificationChannels\Pushover\Events\MessageWasSent;
+use NotificationChannels\Pushover\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 
 class Channel
@@ -30,7 +30,7 @@ class Channel
      * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      *
-     * @throws \NotificationChannels\PushoverNotifications\Exceptions\CouldNotSendNotification
+     * @throws \NotificationChannels\Pushover\Exceptions\CouldNotSendNotification
      */
     public function send($notifiable, Notification $notification)
     {

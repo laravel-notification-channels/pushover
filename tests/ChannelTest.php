@@ -1,13 +1,13 @@
 <?php
 
-namespace NotificationChannels\PusherPushNotifications\Test;
+namespace NotificationChannels\Pushover\Test;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Notification;
 use Mockery;
-use NotificationChannels\PushoverNotifications\Channel;
-use NotificationChannels\PushoverNotifications\Message;
-use NotificationChannels\PushoverNotifications\Pushover;
+use NotificationChannels\Pushover\Channel;
+use NotificationChannels\Pushover\Message;
+use NotificationChannels\Pushover\Pushover;
 use PHPUnit_Framework_TestCase;
 
 class ChannelTest extends PHPUnit_Framework_TestCase
@@ -67,13 +67,5 @@ class ChannelTest extends PHPUnit_Framework_TestCase
 
         $this->channel->send(new Notifiable, $this->notification);
 
-    }
-}
-
-class Notifiable
-{
-    public function routeNotificationFor($channel)
-    {
-        return 'pushover-key';
     }
 }
