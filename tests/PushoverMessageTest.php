@@ -7,7 +7,7 @@ use NotificationChannels\Pushover\Exceptions\EmergencyNotificationRequiresRetryA
 use NotificationChannels\Pushover\PushoverMessage;
 use Orchestra\Testbench\TestCase;
 
-class MessageTest extends TestCase
+class PushoverMessageTest extends TestCase
 {
     /** @var PushoverMessage */
     protected $message;
@@ -22,6 +22,22 @@ class MessageTest extends TestCase
     public function it_can_accept_a_message_when_constructing_a_message()
     {
         $message = new PushoverMessage('message text');
+
+        $this->assertEquals('message text', $message->content);
+    }
+
+    /** @test */
+    public function it_can_create_a_message()
+    {
+        $message = PushoverMessage::create();
+
+        $this->assertInstanceOf(PushoverMessage::class, $message);
+    }
+
+    /** @test */
+    public function it_can_accept_a_message_when_creating_a_message()
+    {
+        $message = PushoverMessage::create('message text');
 
         $this->assertEquals('message text', $message->content);
     }
