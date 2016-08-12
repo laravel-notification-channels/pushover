@@ -5,9 +5,9 @@ namespace NotificationChannels\Pushover\Test;
 use Carbon\Carbon;
 use NotificationChannels\Pushover\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
 use NotificationChannels\Pushover\PushoverMessage;
-use PHPUnit_Framework_TestCase;
+use Orchestra\Testbench\TestCase;
 
-class MessageTest extends PHPUnit_Framework_TestCase
+class MessageTest extends TestCase
 {
     /** @var PushoverMessage */
     protected $message;
