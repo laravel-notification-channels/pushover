@@ -5,19 +5,17 @@ namespace NotificationChannels\Pushover;
 use NotificationChannels\Pushover\Events\MessageWasSent;
 use NotificationChannels\Pushover\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
 
-class Channel
+class PushoverChannel
 {
-    /**
-     * @var Pushover
-     */
+    /** @var Pushover */
     protected $pushover;
 
     /**
      * Create a new Pushover channel instance.
      *
      * @param  Pushover  $pushover
-     * @return void
      */
     public function __construct(Pushover $pushover)
     {
@@ -46,6 +44,9 @@ class Channel
 
         $message = $notification->toPushover($notifiable);
 
+        try {
+
+
         $this->pushover->send([
             'user' => $pushoverKey,
             'message' => $message->content,
@@ -58,6 +59,10 @@ class Channel
             'retry' => $message->retry,
             'expire' => $message->expire,
         ]);
+        }
+        catch(Exception $exception) {
+            throw CouldNotSendNotification::serviceRespondedWithAnException($exception);
+        }
 
         event(new MessageWasSent($notifiable, $notification));
     }

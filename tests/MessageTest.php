@@ -4,28 +4,28 @@ namespace NotificationChannels\Pushover\Test;
 
 use Carbon\Carbon;
 use NotificationChannels\Pushover\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
-use NotificationChannels\Pushover\Message;
+use NotificationChannels\Pushover\PushoverMessage;
 use PHPUnit_Framework_TestCase;
 
 class MessageTest extends PHPUnit_Framework_TestCase
 {
-    /** @var Message */
+    /** @var PushoverMessage */
     protected $message;
 
     public function setUp()
     {
         parent::setUp();
-        $this->message = new Message();
+        $this->message = new PushoverMessage();
     }
 
     /** @test */
     public function it_can_accept_a_message_when_constructing_a_message()
     {
-        $message = new Message('message text');
+        $message = new PushoverMessage('message text');
 
         $this->assertEquals('message text', $message->content);
     }
-    
+
     /** @test */
     public function it_can_set_content()
     {
@@ -88,7 +88,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_set_a_priority()
     {
-        $this->message->priority(Message::NORMAL_PRIORITY);
+        $this->message->priority(PushoverMessage::NORMAL_PRIORITY);
 
         $this->assertEquals(0, $this->message->priority);
     }
@@ -96,7 +96,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_set_a_priority_with_retry_and_expire()
     {
-        $this->message->priority(Message::EMERGENCY_PRIORITY, 60, 600);
+        $this->message->priority(PushoverMessage::EMERGENCY_PRIORITY, 60, 600);
 
         $this->assertEquals(2, $this->message->priority);
         $this->assertEquals(60, $this->message->retry);
@@ -108,9 +108,9 @@ class MessageTest extends PHPUnit_Framework_TestCase
     {
         $this->expectException(EmergencyNotificationRequiresRetryAndExpire::class);
 
-        $this->message->priority(Message::EMERGENCY_PRIORITY);
+        $this->message->priority(PushoverMessage::EMERGENCY_PRIORITY);
     }
-    
+
     /** @test */
     public function it_can_set_the_priority_to_the_lowest()
     {
