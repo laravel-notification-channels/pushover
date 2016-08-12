@@ -8,9 +8,9 @@ use Mockery;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverMessage;
 use NotificationChannels\Pushover\Pushover;
-use PHPUnit_Framework_TestCase;
+use Orchestra\Testbench\TestCase;
 
-class ChannelTest extends PHPUnit_Framework_TestCase
+class ChannelTest extends TestCase
 {
     /** @var PushoverChannel */
     protected $channel;

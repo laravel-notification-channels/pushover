@@ -8,9 +8,9 @@ use Mockery;
 use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
 use NotificationChannels\Pushover\Pushover;
 use GuzzleHttp\Client as HttpClient;
-use PHPUnit_Framework_TestCase;
+use Orchestra\Testbench\TestCase;
 
-class PushoverTest extends PHPUnit_Framework_TestCase
+class PushoverTest extends TestCase
 {
     /** @var Pushover */
     protected $pushover;

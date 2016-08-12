@@ -2,15 +2,15 @@
 
 namespace NotificationChannels\Pushover\Test;
 
-use App\Channels\PushoverMessage;
+use NotificationChannels\Pushover\PushoverMessage;
 use Illuminate\Notifications\Notification;
 use Mockery;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\Pushover;
 use GuzzleHttp\Client as HttpClient;
-use PHPUnit_Framework_TestCase;
+use Orchestra\Testbench\TestCase;
 
-class IntegrationTest extends PHPUnit_Framework_TestCase
+class IntegrationTest extends TestCase
 {
     /** @var HttpClient */
     protected $guzzleClient;
