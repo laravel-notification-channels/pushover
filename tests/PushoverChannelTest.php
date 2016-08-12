@@ -10,7 +10,7 @@ use NotificationChannels\Pushover\PushoverMessage;
 use NotificationChannels\Pushover\Pushover;
 use Orchestra\Testbench\TestCase;
 
-class ChannelTest extends TestCase
+class PushoverChannelTest extends TestCase
 {
     /** @var PushoverChannel */
     protected $channel;
@@ -68,4 +68,32 @@ class ChannelTest extends TestCase
 
         $this->channel->send(new Notifiable, $this->notification);
     }
+
+    /** @test */
+    public function it_does_not_send_a_message_when_notifiable_does_not_have_route_notificaton_for_pushover() {
+        $this->events->shouldReceive('fire');
+
+        $this->notification->shouldReceive('toPushover')->never();
+
+        $this->channel->send(new NotifiableWithoutRouteNotificationForPushover, $this->notification);
+    }
+
+    /** @test */
+    public function it_does_not_send_a_message_when_the_event_firing_returns_false() {
+        $notifiable = Mockery::mock(Notifiable::class);
+        $this->events->shouldReceive('fire')->andReturn(false);
+
+        $notifiable->shouldReceive('routeNotificationFor')->never();
+
+        $this->channel->send($notifiable, $this->notification);
+    }
+}
+
+class NotifiableWithoutRouteNotificationForPushover extends Notifiable{
+
+    public function routeNotificationFor($channel)
+    {
+        return false;
+    }
+
 }
