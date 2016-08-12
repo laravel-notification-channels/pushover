@@ -75,5 +75,4 @@ class IntegrationTest extends PHPUnit_Framework_TestCase
         $dispatcher->shouldReceive('fire');
         app()->instance('events', $dispatcher);
     }
-
 }

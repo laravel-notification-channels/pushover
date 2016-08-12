@@ -149,7 +149,8 @@ class PushoverMessage
      * @param  string $title
      * @return $this
      */
-    public function url($url, $title = null) {
+    public function url($url, $title = null)
+    {
         $this->url = $url;
         $this->urlTitle = $title;
 
@@ -252,9 +253,8 @@ class PushoverMessage
      */
     protected function noEmergencyWithoutRetryOrExpire($priority, $retry, $expire)
     {
-        if ($priority == self::EMERGENCY_PRIORITY && (!isset($retry) || !isset($expire))) {
+        if ($priority == self::EMERGENCY_PRIORITY && (! isset($retry) || ! isset($expire))) {
             throw new EmergencyNotificationRequiresRetryAndExpire();
         }
     }
-
 }
