@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\PushoverNotifications\Events;
+namespace NotificationChannels\Pushover\Events;
 
 use Illuminate\Notifications\Notification;
 

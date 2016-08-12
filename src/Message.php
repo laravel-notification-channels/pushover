@@ -1,9 +1,9 @@
 <?php
 
-namespace NotificationChannels\PushoverNotifications;
+namespace NotificationChannels\Pushover;
 
 use Carbon\Carbon;
-use NotificationChannels\PushoverNotifications\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
+use NotificationChannels\Pushover\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
 
 class Message
 {
