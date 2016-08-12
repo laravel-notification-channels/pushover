@@ -2,6 +2,18 @@
 
 This package makes it easy to send Pushover notifications with Laravel 5.3.
 
+## Contents
+
+- [Installation](#installation)
+	- [Setting up your Pushover account](#setting-up-your-pushover-account)
+- [Usage](#usage)
+	- [Available Message methods](#available-message-methods)
+- [Changelog](#changelog)
+- [Testing](#testing)
+- [Security](#security)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
 
 ## Installation
 
@@ -20,6 +32,8 @@ You must install the service provider:
     NotificationChannels\PushoverNotifications\Provider::class,
 ];
 ```
+
+### Setting up your Pushover account
 
 To start sending messages via Pushover, you have to [register an application](https://pushover.net/apps/build).
 Add the generated Pushover application token to the services config file:
@@ -69,6 +83,10 @@ public function routeNotificationForPushover()
     return $this->pushover;
 }
 ```
+
+### Available Message methods
+
+TODO
 
 
 ## Changelog
