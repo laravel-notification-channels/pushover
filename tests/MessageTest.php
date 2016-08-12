@@ -150,5 +150,4 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(2, $this->message->priority);
     }
-
 }

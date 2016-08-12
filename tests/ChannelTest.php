@@ -52,11 +52,10 @@ class ChannelTest extends PHPUnit_Framework_TestCase
             ->andReturn($this->message);
         $this->pushover->shouldReceive('send')
             ->with(Mockery::subset([
-                'user' => 'pushover-key'
+                'user' => 'pushover-key',
             ]));
 
         $this->channel->send($notifiable, $this->notification);
-
     }
 
     /** @test */
@@ -68,6 +67,5 @@ class ChannelTest extends PHPUnit_Framework_TestCase
         $this->events->shouldReceive('fire')->twice();
 
         $this->channel->send(new Notifiable, $this->notification);
-
     }
 }
