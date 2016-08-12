@@ -5,7 +5,7 @@ This package makes it easy to send Pushover notifications with Laravel 5.3.
 ## Contents
 
 - [Installation](#installation)
-	- [Setting up your Pusher account](#setting-up-your-pushover-account)
+	- [Setting up your Pushover account](#setting-up-your-pushover-account)
 - [Usage](#usage)
 	- [Available Message methods](#available-message-methods)
 - [Changelog](#changelog)
