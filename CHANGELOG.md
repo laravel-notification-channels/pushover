@@ -1,6 +1,6 @@
 # Changelog
 
-All Notable changes to `pushover` will be documented in this file
+All notable changes to `pushover` will be documented in this file
 
 ## 1.0.0 - 201X-XX-XX
 
