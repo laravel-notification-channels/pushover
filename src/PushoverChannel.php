@@ -5,7 +5,6 @@ namespace NotificationChannels\Pushover;
 use NotificationChannels\Pushover\Events\MessageWasSent;
 use NotificationChannels\Pushover\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
 
 class PushoverChannel
 {
