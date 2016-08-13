@@ -3,9 +3,7 @@
 namespace NotificationChannels\Pushover\Test;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Notifications\Notification;
 use Mockery;
-use GuzzleHttp\Client as HttpClient;
 use NotificationChannels\Pushover\Pushover;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverServiceProvider;
@@ -40,5 +38,4 @@ class PushoverServiceProviderTest extends TestCase
 
         $this->provider->boot();
     }
-
 }
