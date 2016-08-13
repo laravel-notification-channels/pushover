@@ -50,7 +50,7 @@ Add the generated Pushover application token to the services config file:
 ...
 'pushover' => [
     'token' => 'YOUR_APPLICATION_TOKEN',
-];
+],
 ...
 ```
 
