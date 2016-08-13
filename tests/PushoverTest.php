@@ -86,6 +86,21 @@ class PushoverTest extends TestCase
     }
 
     /** @test */
+    public function it_throws_an_exception_when_pushover_returns_nothing()
+    {
+        $this->setExpectedException(CouldNotSendNotification::class, 'The communication with Pushover failed because');
+
+        $guzzleRequest = Mockery::mock(\Psr\Http\Message\RequestInterface::class);
+        $guzzleResponse = Mockery::mock(\Psr\Http\Message\ResponseInterface::class);
+        $guzzleResponse->shouldReceive('getStatusCode')->andReturn(400);
+        $guzzleResponse->shouldReceive('getBody')->andReturn('{"message": "[error_message]"}');
+
+        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException(null, $guzzleRequest, null));
+
+        $this->pushover->send([]);
+    }
+
+    /** @test */
     public function it_throws_an_exception_when_an_unknown_communication_error_occurred()
     {
         $this->setExpectedException(CouldNotSendNotification::class, 'The communication with Pushover failed');

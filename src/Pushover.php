@@ -57,7 +57,10 @@ class Pushover
                 'form_params' => $this->paramsWithToken($params),
             ]);
         } catch (RequestException $exception) {
-            throw CouldNotSendNotification::serviceRespondedWithAnError($exception->getResponse());
+            if ($exception->getResponse()) {
+                throw CouldNotSendNotification::serviceRespondedWithAnError($exception->getResponse());
+            }
+            throw CouldNotSendNotification::serviceCommunicationError($exception);
         } catch (Exception $exception) {
             throw CouldNotSendNotification::serviceCommunicationError($exception);
         }
