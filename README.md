@@ -38,7 +38,7 @@ You must install the service provider:
 'providers' => [
     ...
     NotificationChannels\Pushover\PushoverServiceProvider::class,
-];
+],
 ```
 
 ### Setting up your Pushover account
