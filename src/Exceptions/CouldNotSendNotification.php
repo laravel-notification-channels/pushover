@@ -13,8 +13,8 @@ class CouldNotSendNotification extends Exception
 
         $result = json_decode($response->getBody());
 
-        if ($result && isset($result->message)) {
-            return new static('Pushover responded with an error ('.$statusCode.'): '.$result->message);
+        if ($result && isset($result->errors)) {
+            return new static('Pushover responded with an error ('.$statusCode.'): '.implode(', ', $result->errors));
         }
 
         return new static('Pushover responded with an error ('.$statusCode.').');
