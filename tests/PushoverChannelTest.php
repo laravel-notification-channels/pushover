@@ -35,10 +35,6 @@ class PushoverChannelTest extends TestCase
         $this->channel = new PushoverChannel($this->pushover);
         $this->notification = Mockery::mock(Notification::class);
         $this->message = Mockery::mock(PushoverMessage::class);
-
-        $this->events = Mockery::mock('Illuminate\Contracts\Events\Dispatcher');
-
-        app()->instance('events', $this->events);
     }
 
     /** @test */
@@ -46,7 +42,6 @@ class PushoverChannelTest extends TestCase
     {
         $notifiable = new Notifiable;
 
-        $this->events->shouldReceive('fire')->twice();
         $this->notification->shouldReceive('toPushover')
             ->with($notifiable)
             ->andReturn($this->message);
@@ -64,30 +59,15 @@ class PushoverChannelTest extends TestCase
         $this->notification->shouldReceive('toPushover')->andReturn($this->message);
         $this->pushover->shouldReceive('send');
 
-        $this->events->shouldReceive('fire')->twice();
-
         $this->channel->send(new Notifiable, $this->notification);
     }
 
     /** @test */
     public function it_does_not_send_a_message_when_notifiable_does_not_have_route_notificaton_for_pushover()
     {
-        $this->events->shouldReceive('fire');
-
         $this->notification->shouldReceive('toPushover')->never();
 
         $this->channel->send(new NotifiableWithoutRouteNotificationForPushover, $this->notification);
-    }
-
-    /** @test */
-    public function it_does_not_send_a_message_when_the_event_firing_returns_false()
-    {
-        $notifiable = Mockery::mock(Notifiable::class);
-        $this->events->shouldReceive('fire')->andReturn(false);
-
-        $notifiable->shouldReceive('routeNotificationFor')->never();
-
-        $this->channel->send($notifiable, $this->notification);
     }
 }
 
