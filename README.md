@@ -6,6 +6,7 @@
 [![StyleCI](https://styleci.io/repos/65543497/shield)](https://styleci.io/repos/65543497)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/811b5272-2311-4c3b-a445-997bbab7d66d.svg?style=flat-square)](https://insight.sensiolabs.com/projects/811b5272-2311-4c3b-a445-997bbab7d66d)
 [![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/pushover.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pushover)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/pushover/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pushover/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/pushover.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pushover)
 
 This package makes it easy to send Pushover notifications with Laravel 5.3.
