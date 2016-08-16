@@ -2,8 +2,6 @@
 
 namespace NotificationChannels\Pushover;
 
-use NotificationChannels\Pushover\Events\MessageWasSent;
-use NotificationChannels\Pushover\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 
 class PushoverChannel
@@ -14,7 +12,7 @@ class PushoverChannel
     /**
      * Create a new Pushover channel instance.
      *
-     * @param  Pushover  $pushover
+     * @param  Pushover $pushover
      */
     public function __construct(Pushover $pushover)
     {
@@ -31,12 +29,6 @@ class PushoverChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $shouldSendMessage = event(new SendingMessage($notifiable, $notification), [], true) !== false;
-
-        if (! $shouldSendMessage) {
-            return;
-        }
-
         if (! $pushoverKey = $notifiable->routeNotificationFor('pushover')) {
             return;
         }
@@ -55,7 +47,5 @@ class PushoverChannel
             'retry' => $message->retry,
             'expire' => $message->expire,
         ]);
-
-        event(new MessageWasSent($notifiable, $notification));
     }
 }
