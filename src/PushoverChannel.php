@@ -55,7 +55,7 @@ class PushoverChannel
         } catch (ServiceCommunicationError $serviceCommunicationError) {
             $this->events->fire(
                 new NotificationFailed($notifiable, $notification, 'pushover', [
-                    $serviceCommunicationError->getMessage()
+                    $serviceCommunicationError->getMessage(),
                 ])
             );
         }
