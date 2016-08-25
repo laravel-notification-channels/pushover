@@ -39,6 +39,7 @@ class PushoverChannelTest extends TestCase
         $this->channel = new PushoverChannel($this->pushover, $this->events);
         $this->notification = Mockery::mock(Notification::class);
         $this->message = Mockery::mock(PushoverMessage::class);
+        $this->message->shouldReceive('toArray')->andReturn([]);
     }
 
     /** @test */

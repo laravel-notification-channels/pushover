@@ -40,24 +40,18 @@ class PushoverChannel
         $message = $notification->toPushover($notifiable);
 
         try {
-            $this->pushover->send([
+            $this->pushover->send(array_merge($message->toArray(), [
                 'user' => $pushoverKey,
-                'message' => $message->content,
-                'title' => $message->title,
-                'timestamp' => $message->timestamp,
-                'priority' => $message->priority,
-                'url' => $message->url,
-                'url_title' => $message->urlTitle,
-                'sound' => $message->sound,
-                'retry' => $message->retry,
-                'expire' => $message->expire,
-            ]);
+            ]));
         } catch (ServiceCommunicationError $serviceCommunicationError) {
-            $this->events->fire(
-                new NotificationFailed($notifiable, $notification, 'pushover', [
-                    $serviceCommunicationError->getMessage()
-                ])
-            );
+            $this->fireFailedEvent($notifiable, $notification, $serviceCommunicationError->getMessage());
         }
+    }
+
+    protected function fireFailedEvent($notifiable, $notification, $message)
+    {
+        $this->events->fire(
+            new NotificationFailed($notifiable, $notification, 'pushover', [$message])
+        );
     }
 }

@@ -244,6 +244,26 @@ class PushoverMessage
     }
 
     /**
+     * Array representation of Pushover Message.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'message' => $this->content,
+            'title' => $this->title,
+            'timestamp' => $this->timestamp,
+            'priority' => $this->priority,
+            'url' => $this->url,
+            'url_title' => $this->urlTitle,
+            'sound' => $this->sound,
+            'retry' => $this->retry,
+            'expire' => $this->expire,
+        ];
+    }
+
+    /**
      * Ensure an emergency message has an retry and expiry time.
      *
      * @param  int  $priority
