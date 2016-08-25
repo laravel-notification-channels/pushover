@@ -2,15 +2,18 @@
 
 namespace NotificationChannels\Pushover;
 
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Events\NotificationFailed;
-use Illuminate\Contracts\Events\Dispatcher;
 use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
 
 class PushoverChannel
 {
     /** @var Pushover */
     protected $pushover;
+
+    /** @var Dispatcher */
+    protected $events;
 
     /**
      * Create a new Pushover channel instance.
