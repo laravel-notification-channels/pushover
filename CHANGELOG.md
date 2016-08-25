@@ -1,7 +1,15 @@
 # Changelog
 
-All notable changes to `pushover` will be documented in this file
+All notable changes to `pushover` will be documented in this file.
 
-## 1.0.0 - 201X-XX-XX
+## 1.0.0 - 2016-08-25
+- First release :tada:
+- Fire event (instead of exception) when communication with Pushover fails
+- Add backwards compatibility for older Laravel versions (with `laravel-notification-channels/backport`)
 
-- initial release
+## 0.0.2 - 2016-08-13
+- Better exceptions
+- Improved code quality
+
+## 0.0.1 - 2016-08-12
+- Experimental release
