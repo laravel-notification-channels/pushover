@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Pushover\Test;
 
+use Illuminate\Contracts\Events\Dispatcher;
 use NotificationChannels\Pushover\PushoverMessage;
 use Illuminate\Notifications\Notification;
 use Mockery;
@@ -18,11 +19,15 @@ class IntegrationTest extends TestCase
     /** @var Notification */
     protected $notification;
 
+    /** @var Dispatcher */
+    protected $events;
+
     public function setUp()
     {
         parent::setUp();
 
         $this->guzzleClient = Mockery::mock(HttpClient::class);
+        $this->events = Mockery::mock(Dispatcher::class);
         $this->notification = Mockery::mock(Notification::class);
 
         $this->ignoreEvents();
@@ -54,7 +59,7 @@ class IntegrationTest extends TestCase
 
         $pushover = new Pushover($this->guzzleClient, 'application-token');
 
-        $channel = new PushoverChannel($pushover);
+        $channel = new PushoverChannel($pushover, $this->events);
 
         $this->notification->shouldReceive('toPushover')->andReturn($message);
 

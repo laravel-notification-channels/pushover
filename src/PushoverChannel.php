@@ -3,6 +3,9 @@
 namespace NotificationChannels\Pushover;
 
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Events\NotificationFailed;
+use Illuminate\Contracts\Events\Dispatcher;
+use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
 
 class PushoverChannel
 {
@@ -14,9 +17,10 @@ class PushoverChannel
      *
      * @param  Pushover $pushover
      */
-    public function __construct(Pushover $pushover)
+    public function __construct(Pushover $pushover, Dispatcher $events)
     {
         $this->pushover = $pushover;
+        $this->events = $events;
     }
 
     /**
@@ -35,17 +39,25 @@ class PushoverChannel
 
         $message = $notification->toPushover($notifiable);
 
-        $this->pushover->send([
-            'user' => $pushoverKey,
-            'message' => $message->content,
-            'title' => $message->title,
-            'timestamp' => $message->timestamp,
-            'priority' => $message->priority,
-            'url' => $message->url,
-            'url_title' => $message->urlTitle,
-            'sound' => $message->sound,
-            'retry' => $message->retry,
-            'expire' => $message->expire,
-        ]);
+        try {
+            $this->pushover->send([
+                'user' => $pushoverKey,
+                'message' => $message->content,
+                'title' => $message->title,
+                'timestamp' => $message->timestamp,
+                'priority' => $message->priority,
+                'url' => $message->url,
+                'url_title' => $message->urlTitle,
+                'sound' => $message->sound,
+                'retry' => $message->retry,
+                'expire' => $message->expire,
+            ]);
+        } catch (ServiceCommunicationError $serviceCommunicationError) {
+            $this->events->fire(
+                new NotificationFailed($notifiable, $notification, 'pushover', [
+                    $serviceCommunicationError->getMessage()
+                ])
+            );
+        }
     }
 }

@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\Exception\RequestException;
 use Mockery;
 use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
+use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
 use NotificationChannels\Pushover\Pushover;
 use GuzzleHttp\Client as HttpClient;
 use Orchestra\Testbench\TestCase;
@@ -88,7 +89,7 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_pushover_returns_nothing()
     {
-        $this->setExpectedException(CouldNotSendNotification::class, 'The communication with Pushover failed because');
+        $this->setExpectedException(ServiceCommunicationError::class, 'The communication with Pushover failed because');
 
         $guzzleRequest = Mockery::mock(\Psr\Http\Message\RequestInterface::class);
 
@@ -100,7 +101,7 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_an_unknown_communication_error_occurred()
     {
-        $this->setExpectedException(CouldNotSendNotification::class, 'The communication with Pushover failed');
+        $this->setExpectedException(ServiceCommunicationError::class, 'The communication with Pushover failed');
 
         $this->guzzleClient->shouldReceive('post')->andThrow(new Exception);
 
