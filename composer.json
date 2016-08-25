@@ -14,10 +14,10 @@
     "require": {
         "php": ">=5.6.4",
         "guzzlehttp/guzzle": "^6.2",
-        "illuminate/events": "^5.3@dev",
-        "illuminate/queue": "^5.3@dev",
-        "illuminate/notifications": "^5.3@dev",
-        "illuminate/support": "^5.3@dev",
+        "illuminate/events": "5.3.*",
+        "illuminate/queue": "5.3.*",
+        "illuminate/notifications": "5.3.*",
+        "illuminate/support": "5.3.*",
         "nesbot/carbon": "^1.21"
     },
     "require-dev": {
@@ -40,6 +40,5 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "minimum-stability": "dev"
+    }
 }
