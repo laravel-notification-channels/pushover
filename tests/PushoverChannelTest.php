@@ -2,9 +2,12 @@
 
 namespace NotificationChannels\Pushover\Test;
 
+use Exception;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use Mockery;
+use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverMessage;
 use NotificationChannels\Pushover\Pushover;
@@ -32,7 +35,8 @@ class PushoverChannelTest extends TestCase
         parent::setUp();
 
         $this->pushover = Mockery::mock(Pushover::class);
-        $this->channel = new PushoverChannel($this->pushover);
+        $this->events = Mockery::mock(Dispatcher::class);
+        $this->channel = new PushoverChannel($this->pushover, $this->events);
         $this->notification = Mockery::mock(Notification::class);
         $this->message = Mockery::mock(PushoverMessage::class);
     }
@@ -54,10 +58,14 @@ class PushoverChannelTest extends TestCase
     }
 
     /** @test */
-    public function it_fires_events_while_sending_a_message()
+    public function it_fires_a_notification_failed_event_when_the_communication_with_pushover_failed()
     {
         $this->notification->shouldReceive('toPushover')->andReturn($this->message);
-        $this->pushover->shouldReceive('send');
+        $this->pushover->shouldReceive('send')->andThrow(
+            ServiceCommunicationError::serviceCommunicationError(new Exception())
+        );
+
+        $this->events->shouldReceive('fire')->with(Mockery::type(NotificationFailed::class));
 
         $this->channel->send(new Notifiable, $this->notification);
     }

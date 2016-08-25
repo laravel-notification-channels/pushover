@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
 use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
+use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
 
 class Pushover
 {
@@ -60,9 +61,9 @@ class Pushover
             if ($exception->getResponse()) {
                 throw CouldNotSendNotification::serviceRespondedWithAnError($exception->getResponse());
             }
-            throw CouldNotSendNotification::serviceCommunicationError($exception);
+            throw ServiceCommunicationError::serviceCommunicationError($exception);
         } catch (Exception $exception) {
-            throw CouldNotSendNotification::serviceCommunicationError($exception);
+            throw ServiceCommunicationError::serviceCommunicationError($exception);
         }
     }
 

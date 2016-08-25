@@ -19,9 +19,4 @@ class CouldNotSendNotification extends Exception
 
         return new static('Pushover responded with an error ('.$statusCode.').');
     }
-
-    public static function serviceCommunicationError(Exception $exception)
-    {
-        return new static("The communication with Pushover failed because `{$exception->getCode()} - {$exception->getMessage()}`");
-    }
 }
