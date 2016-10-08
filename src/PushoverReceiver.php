@@ -11,7 +11,7 @@ class PushoverReceiver
      * PushoverReceiver constructor.
      * @param  $key  User or group key.
      */
-    private function __construct($key)
+    protected function __construct($key)
     {
         $this->key = $key;
     }
