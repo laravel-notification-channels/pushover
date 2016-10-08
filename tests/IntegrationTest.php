@@ -46,6 +46,7 @@ class IntegrationTest extends TestCase
         $this->requestWillBeSentToPushoverWith([
             'token' => 'application-token',
             'user' => 'pushover-key',
+            'device' => 'iphone,desktop',
             'message' => 'Message text',
             'title' => 'Message title',
             'priority' => 2,
@@ -63,7 +64,7 @@ class IntegrationTest extends TestCase
 
         $this->notification->shouldReceive('toPushover')->andReturn($message);
 
-        $channel->send(new Notifiable, $this->notification);
+        $channel->send(new NotifiableWithPushoverReceiver, $this->notification);
     }
 
     protected function requestWillBeSentToPushoverWith($params)
@@ -71,7 +72,8 @@ class IntegrationTest extends TestCase
         $this->guzzleClient->shouldReceive('post')
             ->with('https://api.pushover.net/1/messages.json', [
                 'form_params' => $params,
-            ]);
+            ])
+            ->once();
     }
 
     protected function ignoreEvents()
