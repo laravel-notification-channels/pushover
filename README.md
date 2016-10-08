@@ -106,7 +106,7 @@ You can also send a message to a Pushover group:
 ```php
 ...
 public function routeNotificationForPushover() {
-    return PushoverReceiver::withGroup('pushover-group-key');
+    return PushoverReceiver::withGroupKey('pushover-group-key');
 }
 ```
 
