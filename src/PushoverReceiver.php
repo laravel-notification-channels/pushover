@@ -70,5 +70,4 @@ class PushoverReceiver
             'device' => implode(',', $this->devices),
         ];
     }
-
 }
