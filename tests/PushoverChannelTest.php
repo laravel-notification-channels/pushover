@@ -53,7 +53,27 @@ class PushoverChannelTest extends TestCase
         $this->pushover->shouldReceive('send')
             ->with(Mockery::subset([
                 'user' => 'pushover-key',
-            ]));
+                'device' => '',
+            ]))
+            ->once();
+
+        $this->channel->send($notifiable, $this->notification);
+    }
+
+    /** @test */
+    public function it_can_send_a_message_to_pushover_using_a_pushover_receiver()
+    {
+        $notifiable = new NotifiableWithPushoverReceiver;
+
+        $this->notification->shouldReceive('toPushover')
+            ->with($notifiable)
+            ->andReturn($this->message);
+        $this->pushover->shouldReceive('send')
+            ->with(Mockery::subset([
+                'user' => 'pushover-key',
+                'device' => 'iphone,desktop',
+            ]))
+            ->once();
 
         $this->channel->send($notifiable, $this->notification);
     }

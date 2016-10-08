@@ -87,7 +87,26 @@ Make sure there is a `routeNotificationForPushover` method on your notifiable mo
 ...
 public function routeNotificationForPushover()
 {
-    return $this->pushover;
+    return $this->pushover_key;
+}
+```
+
+If you want to specify specific devices, you can return a `PushoverReceiver` object.
+```php
+...
+public function routeNotificationForPushover() {
+    return PushoverReceiver::withUserKey('pushover-key')
+        ->toDevice('iphone')
+        ->toDevice('desktop')
+        // or, if you prefer:
+        ->toDevice(['iphone', 'desktop']);
+}
+```
+You can also send a message to a Pushover group:
+```php
+...
+public function routeNotificationForPushover() {
+    return PushoverReceiver::withGroupKey('pushover-group-key');
 }
 ```
 

@@ -36,16 +36,18 @@ class PushoverChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! $pushoverKey = $notifiable->routeNotificationFor('pushover')) {
+        if (! $pushoverReceiver = $notifiable->routeNotificationFor('pushover')) {
             return;
+        }
+
+        if (is_string($pushoverReceiver)) {
+            $pushoverReceiver = PushoverReceiver::withUserKey($pushoverReceiver);
         }
 
         $message = $notification->toPushover($notifiable);
 
         try {
-            $this->pushover->send(array_merge($message->toArray(), [
-                'user' => $pushoverKey,
-            ]));
+            $this->pushover->send(array_merge($message->toArray(), $pushoverReceiver->toArray()));
         } catch (ServiceCommunicationError $serviceCommunicationError) {
             $this->fireFailedEvent($notifiable, $notification, $serviceCommunicationError->getMessage());
         }
