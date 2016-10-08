@@ -55,5 +55,4 @@ class PushoverReceiverTest extends TestCase
 
         $this->assertArraySubset(['device' => 'iphone,desktop,macbook'], $this->pushoverReceiver->toArray());
     }
-
 }
