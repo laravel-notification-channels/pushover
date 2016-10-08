@@ -5,7 +5,7 @@ namespace NotificationChannels\Pushover\Test;
 use NotificationChannels\Pushover\PushoverReceiver;
 use Orchestra\Testbench\TestCase;
 
-class PushoverReceiverTest extends \PHPUnit_Framework_TestCase
+class PushoverReceiverTest extends TestCase
 {
     private $pushoverReceiver;
 
@@ -19,7 +19,7 @@ class PushoverReceiverTest extends \PHPUnit_Framework_TestCase
     {
         $pushoverReceiver = PushoverReceiver::withUserKey('pushover-key');
 
-        $this->assertArraySubset([ 'user' => 'pushover-key' ], $pushoverReceiver->toArray());
+        $this->assertArraySubset(['user' => 'pushover-key'], $pushoverReceiver->toArray());
     }
 
     /** @test */
@@ -27,7 +27,7 @@ class PushoverReceiverTest extends \PHPUnit_Framework_TestCase
     {
         $pushoverReceiver = PushoverReceiver::withGroupKey('pushover-key');
 
-        $this->assertArraySubset([ 'user' => 'pushover-key' ], $pushoverReceiver->toArray());
+        $this->assertArraySubset(['user' => 'pushover-key'], $pushoverReceiver->toArray());
     }
 
     /** @test */
@@ -35,7 +35,7 @@ class PushoverReceiverTest extends \PHPUnit_Framework_TestCase
     {
         $this->pushoverReceiver->toDevice('iphone');
 
-        $this->assertArraySubset([ 'device' => 'iphone' ], $this->pushoverReceiver->toArray());
+        $this->assertArraySubset(['device' => 'iphone'], $this->pushoverReceiver->toArray());
     }
 
     /** @test */
@@ -45,7 +45,7 @@ class PushoverReceiverTest extends \PHPUnit_Framework_TestCase
             ->toDevice('desktop')
             ->toDevice('macbook');
 
-        $this->assertArraySubset([ 'device' => 'iphone,desktop,macbook' ], $this->pushoverReceiver->toArray());
+        $this->assertArraySubset(['device' => 'iphone,desktop,macbook'], $this->pushoverReceiver->toArray());
     }
 
     /** @test */
@@ -53,7 +53,7 @@ class PushoverReceiverTest extends \PHPUnit_Framework_TestCase
     {
         $this->pushoverReceiver->toDevice(['iphone', 'desktop', 'macbook']);
 
-        $this->assertArraySubset([ 'device' => 'iphone,desktop,macbook' ], $this->pushoverReceiver->toArray());
+        $this->assertArraySubset(['device' => 'iphone,desktop,macbook'], $this->pushoverReceiver->toArray());
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
-namespace NotificationChannels\Pushover;
 
+namespace NotificationChannels\Pushover;
 
 class PushoverReceiver
 {
@@ -22,7 +22,8 @@ class PushoverReceiver
      * @param  $userKey  Pushover user key.
      * @return PushoverReceiver
      */
-    public static function withUserKey($userKey) {
+    public static function withUserKey($userKey)
+    {
         return new static($userKey);
     }
 
@@ -32,7 +33,8 @@ class PushoverReceiver
      * @param  $groupKey  Pushover group key.
      * @return PushoverReceiver
      */
-    public static function withGroupKey($groupKey) {
+    public static function withGroupKey($groupKey)
+    {
         // This has exactly the same behaviour as an user key, so we
         // will use the same factory method as for the user key.
         return self::withUserKey($groupKey);
@@ -44,7 +46,8 @@ class PushoverReceiver
      * @param  array|string  $device
      * @return PushoverReceiver
      */
-    public function toDevice($device) {
+    public function toDevice($device)
+    {
         if (is_array($device)) {
             $this->devices = array_merge($device, $this->devices);
 
@@ -64,7 +67,7 @@ class PushoverReceiver
     {
         return [
             'user' => $this->key,
-            'device' => implode(',', $this->devices)
+            'device' => implode(',', $this->devices),
         ];
     }
 

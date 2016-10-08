@@ -53,7 +53,7 @@ class PushoverChannelTest extends TestCase
         $this->pushover->shouldReceive('send')
             ->with(Mockery::subset([
                 'user' => 'pushover-key',
-                'device' => ''
+                'device' => '',
             ]))
             ->once();
 
@@ -71,7 +71,7 @@ class PushoverChannelTest extends TestCase
         $this->pushover->shouldReceive('send')
             ->with(Mockery::subset([
                 'user' => 'pushover-key',
-                'device' => 'iphone,desktop'
+                'device' => 'iphone,desktop',
             ]))
             ->once();
 
