@@ -3,7 +3,6 @@
 namespace NotificationChannels\Pushover\Test;
 
 use NotificationChannels\Pushover\PushoverReceiver;
-use Orchestra\Testbench\TestCase;
 
 class PushoverReceiverTest extends TestCase
 {
