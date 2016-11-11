@@ -2,6 +2,9 @@
 
 All notable changes to `pushover` will be documented in this file.
 
+## 1.0.1 - 2016-10-08
+- Send messages to groups or to specific devices using a `PushoverReceiver` object, see the README for instructions
+
 ## 1.0.0 - 2016-08-25
 - First release :tada:
 - Fire event (instead of exception) when communication with Pushover fails
