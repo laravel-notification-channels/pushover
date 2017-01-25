@@ -3,9 +3,9 @@
 namespace NotificationChannels\Pushover\Test;
 
 use Carbon\Carbon;
-use NotificationChannels\Pushover\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
-use NotificationChannels\Pushover\PushoverMessage;
 use Orchestra\Testbench\TestCase;
+use NotificationChannels\Pushover\PushoverMessage;
+use NotificationChannels\Pushover\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
 
 class PushoverMessageTest extends TestCase
 {
