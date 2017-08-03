@@ -14,8 +14,8 @@
     "require": {
         "php": ">=5.6.4",
         "guzzlehttp/guzzle": "^6.2",
-        "illuminate/notifications": "5.3.*|5.4.*",
-        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*",
+        "illuminate/notifications": "5.3.*|5.4.*|5.5.*",
+        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
         "nesbot/carbon": "^1.21"
     },
     "require-dev": {
@@ -38,5 +38,12 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NotificationChannels\\Pushover\\PushoverServiceProvider"
+            ]
+        }
     }
 }
