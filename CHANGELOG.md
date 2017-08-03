@@ -2,7 +2,10 @@
 
 All notable changes to `pushover` will be documented in this file.
 
-## 1.0.2 - 2017-01-25
+## 1.2.0 - 2017-08-03
+- Add support for Laravel 5.5 (including auto discovery)
+
+## 1.1.0 - 2017-01-25
 - Add support for Laravel 5.4
 
 ## 1.0.1 - 2016-10-08
