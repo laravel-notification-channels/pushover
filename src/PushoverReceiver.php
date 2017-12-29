@@ -5,6 +5,7 @@ namespace NotificationChannels\Pushover;
 class PushoverReceiver
 {
     protected $key;
+    protected $token;
     protected $devices = [];
 
     /**
@@ -59,15 +60,34 @@ class PushoverReceiver
     }
 
     /**
+     * Set the application token.
+     *
+     * @param $token
+     * @return PushoverReceiver
+     */
+    public function withApplicationToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
      * Get array representation of Pushover receiver.
      *
      * @return array
      */
     public function toArray()
     {
-        return [
+        $receiverArray = [
             'user' => $this->key,
             'device' => implode(',', $this->devices),
         ];
+
+        if ($this->token) {
+            $receiverArray['token'] = $this->token;
+        }
+
+        return $receiverArray;
     }
 }

@@ -41,6 +41,19 @@ class PushoverTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_a_request_with_an_overridden_token()
+    {
+        $this->guzzleClient->shouldReceive('post')
+            ->with('https://api.pushover.net/1/messages.json', [
+                'form_params' => [
+                    'token' => 'dynamic-application-token',
+                ],
+            ]);
+
+        $this->pushover->send(['token' => 'dynamic-application-token']);
+    }
+
+    /** @test */
     public function it_can_accept_parameters_for_a_send_request()
     {
         $this->guzzleClient->shouldReceive('post')

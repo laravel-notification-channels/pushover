@@ -31,6 +31,24 @@ class PushoverReceiverTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_up_a_receiver_with_an_application_token()
+    {
+        $pushoverReceiver = PushoverReceiver::withUserKey('pushover-key')->withApplicationToken('pushover-token');
+
+        $this->assertArraySubset(['user' => 'pushover-key', 'token' => 'pushover-token'], $pushoverReceiver->toArray());
+    }
+
+    /** @test */
+    public function it_only_exposes_app_token_when_set()
+    {
+        $pushoverReceiverUserKey = PushoverReceiver::withUserKey('pushover-key');
+        $pushoverReceiverGroupKey = PushoverReceiver::withGroupKey('pushover-key');
+
+        $this->assertArrayNotHasKey('token', $pushoverReceiverUserKey->toArray());
+        $this->assertArrayNotHasKey('token', $pushoverReceiverGroupKey->toArray());
+    }
+
+    /** @test */
     public function it_can_add_a_single_device_to_the_receiver()
     {
         $this->pushoverReceiver->toDevice('iphone');
