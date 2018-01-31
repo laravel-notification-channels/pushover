@@ -2,6 +2,9 @@
 
 All notable changes to `pushover` will be documented in this file.
 
+## 1.2.1 - 2018-01-31
+- Add support for dynamic application tokens (PR #22)
+
 ## 1.2.0 - 2017-08-03
 - Add support for Laravel 5.5 (including auto discovery)
 
