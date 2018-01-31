@@ -102,6 +102,16 @@ public function routeNotificationForPushover() {
         ->toDevice(['iphone', 'desktop']);
 }
 ```
+
+If you want to (dynamically) overrule the application token from the services config, e.g. because each user holds their own application token, return a `PushoverReceiver` object like this:
+```php
+...
+public function routeNotificationForPushover() {
+    return PushoverReceiver::withUserKey('pushover-key')
+        ->withApplicationToken('app-token');
+}
+```
+
 You can also send a message to a Pushover group:
 ```php
 ...

@@ -68,15 +68,15 @@ class Pushover
     }
 
     /**
-     * Merge token into parameters array.
+     * Merge token into parameters array, unless it has been set on the PushoverReceiver.
      *
      * @param  array  $params
      * @return array
      */
     protected function paramsWithToken($params)
     {
-        return array_merge($params, [
+        return array_merge([
             'token' => $this->token,
-        ]);
+        ], $params);
     }
 }
