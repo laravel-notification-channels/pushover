@@ -125,10 +125,10 @@ Please note that only the message content is mandatory, all other methods are op
 
 - `content($message)`: Accepts a string value for the message text.
 - `title($title)`: Accepts a string value for the message title.
-- `time($timestamp)`: Accepts either a `Carbon` object or an UNIX timestamp.
+- `time($timestamp)`: Accepts either a `Carbon` object or a UNIX timestamp.
 - `url($url[, $title])`: Accepts a string value for a [supplementary url](https://pushover.net/api#urls) and an optional string value for the title of the url.
 - `sound($sound)`: Accepts a string value for the [notification sound](https://pushover.net/api#sounds).
-- `priority($priority[, $retryTimeout, $expireAfter])`: Accepts an integer value for the priority and, when the priority is set to emergency, also an integer value for the retry timeout and expiry time (in seconds). Priority values are available as constants: `LOWEST_PRIORITY`, `LOW_PRIORITY`, `NORMAL_PRIORITY` and `EMERGENCY_PRIORITY`.
+- `priority($priority[, $retryTimeout, $expireAfter])`: Accepts an integer value for the priority and, when the priority is set to emergency, also an integer value for the retry timeout and expiry time (in seconds). Priority values are available as constants: `PushoverMessage::LOWEST_PRIORITY`, `PushoverMessage::LOW_PRIORITY`, `PushoverMessage::NORMAL_PRIORITY` and `PushoverMessage::EMERGENCY_PRIORITY`.
 - `lowestPriority()`: Sets the priority to the lowest priority.
 - `lowPriority()`: Sets the priority to low.
 - `normalPriority()`: Sets the priority to normal.
