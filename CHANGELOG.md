@@ -2,6 +2,9 @@
 
 All notable changes to `pushover` will be documented in this file.
 
+## 1.2.3 - 2018-09-25
+- Add support for Laravel 5.7 (PR #25)
+
 ## 1.2.2 - 2018-02-13
 - Add support for Laravel 5.6
 
