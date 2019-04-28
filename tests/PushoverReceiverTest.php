@@ -9,7 +9,7 @@ class PushoverReceiverTest extends TestCase
 {
     private $pushoverReceiver;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->pushoverReceiver = PushoverReceiver::withUserKey('pushover-key');
     }
