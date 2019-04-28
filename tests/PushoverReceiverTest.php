@@ -3,6 +3,8 @@
 namespace NotificationChannels\Pushover\Test;
 
 use Orchestra\Testbench\TestCase;
+use DMS\PHPUnitExtensions\ArraySubset\Assert;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use NotificationChannels\Pushover\PushoverReceiver;
 
 class PushoverReceiverTest extends TestCase
@@ -19,7 +21,7 @@ class PushoverReceiverTest extends TestCase
     {
         $pushoverReceiver = PushoverReceiver::withUserKey('pushover-key');
 
-        $this->assertArraySubset(['user' => 'pushover-key'], $pushoverReceiver->toArray());
+        Assert::assertArraySubset(['user' => 'pushover-key'], $pushoverReceiver->toArray());
     }
 
     /** @test */
@@ -27,7 +29,7 @@ class PushoverReceiverTest extends TestCase
     {
         $pushoverReceiver = PushoverReceiver::withGroupKey('pushover-key');
 
-        $this->assertArraySubset(['user' => 'pushover-key'], $pushoverReceiver->toArray());
+        Assert::assertArraySubset(['user' => 'pushover-key'], $pushoverReceiver->toArray());
     }
 
     /** @test */
@@ -35,7 +37,7 @@ class PushoverReceiverTest extends TestCase
     {
         $pushoverReceiver = PushoverReceiver::withUserKey('pushover-key')->withApplicationToken('pushover-token');
 
-        $this->assertArraySubset(['user' => 'pushover-key', 'token' => 'pushover-token'], $pushoverReceiver->toArray());
+        Assert::assertArraySubset(['user' => 'pushover-key', 'token' => 'pushover-token'], $pushoverReceiver->toArray());
     }
 
     /** @test */
@@ -53,7 +55,7 @@ class PushoverReceiverTest extends TestCase
     {
         $this->pushoverReceiver->toDevice('iphone');
 
-        $this->assertArraySubset(['device' => 'iphone'], $this->pushoverReceiver->toArray());
+        Assert::assertArraySubset(['device' => 'iphone'], $this->pushoverReceiver->toArray());
     }
 
     /** @test */
@@ -63,7 +65,7 @@ class PushoverReceiverTest extends TestCase
             ->toDevice('desktop')
             ->toDevice('macbook');
 
-        $this->assertArraySubset(['device' => 'iphone,desktop,macbook'], $this->pushoverReceiver->toArray());
+        Assert::assertArraySubset(['device' => 'iphone,desktop,macbook'], $this->pushoverReceiver->toArray());
     }
 
     /** @test */
@@ -71,6 +73,6 @@ class PushoverReceiverTest extends TestCase
     {
         $this->pushoverReceiver->toDevice(['iphone', 'desktop', 'macbook']);
 
-        $this->assertArraySubset(['device' => 'iphone,desktop,macbook'], $this->pushoverReceiver->toArray());
+        Assert::assertArraySubset(['device' => 'iphone,desktop,macbook'], $this->pushoverReceiver->toArray());
     }
 }
