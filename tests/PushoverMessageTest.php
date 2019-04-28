@@ -122,7 +122,7 @@ class PushoverMessageTest extends TestCase
     /** @test */
     public function it_cannot_set_priority_to_emergency_when_not_providing_a_retry_and_expiry_time()
     {
-        $this->setExpectedException(EmergencyNotificationRequiresRetryAndExpire::class);
+        $this->expectException(EmergencyNotificationRequiresRetryAndExpire::class);
 
         $this->message->priority(PushoverMessage::EMERGENCY_PRIORITY);
     }
