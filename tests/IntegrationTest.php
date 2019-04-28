@@ -22,7 +22,7 @@ class IntegrationTest extends TestCase
     /** @var Dispatcher */
     protected $events;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
