@@ -19,7 +19,7 @@ class PushoverTest extends TestCase
     /** @var HttpClient */
     protected $guzzleClient;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
