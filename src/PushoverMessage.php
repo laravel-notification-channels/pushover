@@ -236,7 +236,7 @@ class PushoverMessage
     {
         return $this->priority(self::HIGH_PRIORITY);
     }
-    
+
     /**
      * Set the text type of the Pushover message to HTML.
      *
