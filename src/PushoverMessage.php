@@ -71,6 +71,13 @@ class PushoverMessage
      * @var string
      */
     public $sound;
+    
+    /**
+     * Set Message Type to HTML
+     *
+     * @var int
+     */
+    public $html;
 
     /**
      * Message priorities.
@@ -229,6 +236,18 @@ class PushoverMessage
     {
         return $this->priority(self::HIGH_PRIORITY);
     }
+    
+    /**
+     * Set the text type of the Pushover message to html
+     *
+     * @return this
+     */
+    public function setHtml()
+    {
+        $this->html = 1;
+        
+        return $this;
+    }
 
     /**
      * Set the priority of the Pushover message to emergency.
@@ -260,6 +279,7 @@ class PushoverMessage
             'sound' => $this->sound,
             'retry' => $this->retry,
             'expire' => $this->expire,
+            'html' => $this->html
         ];
     }
 
