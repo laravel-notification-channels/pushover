@@ -171,7 +171,7 @@ class PushoverMessageTest extends TestCase
     public function it_can_set_the_texttype_to_html()
     {
         $this->message->setHtml();
-        
+
         $this->assertEquals(1, $this->message->html);
     }
 }
