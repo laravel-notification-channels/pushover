@@ -71,9 +71,9 @@ class PushoverMessage
      * @var string
      */
     public $sound;
-    
+
     /**
-     * Set Message Type to HTML
+     * Set Message Type to HTML.
      *
      * @var int
      */
@@ -238,14 +238,14 @@ class PushoverMessage
     }
     
     /**
-     * Set the text type of the Pushover message to html
+     * Set the text type of the Pushover message to HTML.
      *
      * @return this
      */
     public function setHtml()
     {
         $this->html = 1;
-        
+
         return $this;
     }
 
@@ -279,7 +279,7 @@ class PushoverMessage
             'sound' => $this->sound,
             'retry' => $this->retry,
             'expire' => $this->expire,
-            'html' => $this->html
+            'html' => $this->html,
         ];
     }
 
