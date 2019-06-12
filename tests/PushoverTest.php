@@ -19,7 +19,7 @@ class PushoverTest extends TestCase
     /** @var HttpClient */
     protected $guzzleClient;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -72,7 +72,8 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_pushover_returns_an_error_with_invalid_json()
     {
-        $this->setExpectedException(CouldNotSendNotification::class, 'Pushover responded with an error (400).');
+        $this->expectException(CouldNotSendNotification::class);
+        $this->expectExceptionMessage('Pushover responded with an error (400).');
 
         $guzzleRequest = Mockery::mock(\Psr\Http\Message\RequestInterface::class);
         $guzzleResponse = Mockery::mock(\Psr\Http\Message\ResponseInterface::class);
@@ -87,7 +88,8 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_pushover_returns_an_error_with_valid_json()
     {
-        $this->setExpectedException(CouldNotSendNotification::class, 'Pushover responded with an error (400): error_message_1, error_message_2');
+        $this->expectException(CouldNotSendNotification::class);
+        $this->expectExceptionMessage('Pushover responded with an error (400): error_message_1, error_message_2');
 
         $guzzleRequest = Mockery::mock(\Psr\Http\Message\RequestInterface::class);
         $guzzleResponse = Mockery::mock(\Psr\Http\Message\ResponseInterface::class);
@@ -102,7 +104,8 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_pushover_returns_nothing()
     {
-        $this->setExpectedException(ServiceCommunicationError::class, 'The communication with Pushover failed because');
+        $this->expectException(ServiceCommunicationError::class);
+        $this->expectExceptionMessage('The communication with Pushover failed because');
 
         $guzzleRequest = Mockery::mock(\Psr\Http\Message\RequestInterface::class);
 
@@ -114,7 +117,8 @@ class PushoverTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_an_unknown_communication_error_occurred()
     {
-        $this->setExpectedException(ServiceCommunicationError::class, 'The communication with Pushover failed');
+        $this->expectException(ServiceCommunicationError::class);
+        $this->expectExceptionMessage('The communication with Pushover failed');
 
         $this->guzzleClient->shouldReceive('post')->andThrow(new Exception);
 

@@ -17,7 +17,7 @@ class PushoverServiceProviderTest extends TestCase
     /** @var Application */
     protected $app;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
