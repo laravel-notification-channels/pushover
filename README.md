@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/pushover/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pushover/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/pushover.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pushover)
 
-This package makes it easy to send Pushover notifications with Laravel Notifications (included in Laravel 5.3 and higher).
+This package makes it easy to send Pushover notifications with Laravel Notifications.
 
 ## Contents
 
@@ -30,16 +30,6 @@ You can install the package via composer:
 
 ``` bash
 composer require laravel-notification-channels/pushover
-```
-
-For Laravel 5.4 or lower, you must add the service provider to the app config:
-
-```php
-// config/app.php
-'providers' => [
-    ...
-    NotificationChannels\Pushover\PushoverServiceProvider::class,
-],
 ```
 
 ### Setting up your Pushover account
