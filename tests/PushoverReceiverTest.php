@@ -4,7 +4,6 @@ namespace NotificationChannels\Pushover\Test;
 
 use Orchestra\Testbench\TestCase;
 use DMS\PHPUnitExtensions\ArraySubset\Assert;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use NotificationChannels\Pushover\PushoverReceiver;
 
 class PushoverReceiverTest extends TestCase
