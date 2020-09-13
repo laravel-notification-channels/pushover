@@ -12,10 +12,10 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
-        "guzzlehttp/guzzle": "^6.2",
-        "illuminate/notifications": "~5.5 || ^6.0 || ^7.0 || ^8.0",
-        "illuminate/support": "~5.5 || ^6.0 || ^7.0 || ^8.0"
+        "php": ">=7.3",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "illuminate/notifications": "^8.0",
+        "illuminate/support": " ^8.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.0",
