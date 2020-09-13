@@ -2,12 +2,12 @@
 
 namespace NotificationChannels\Pushover\Test;
 
-use Mockery;
-use Orchestra\Testbench\TestCase;
-use NotificationChannels\Pushover\Pushover;
 use Illuminate\Contracts\Foundation\Application;
+use Mockery;
+use NotificationChannels\Pushover\Pushover;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverServiceProvider;
+use Orchestra\Testbench\TestCase;
 
 class PushoverServiceProviderTest extends TestCase
 {

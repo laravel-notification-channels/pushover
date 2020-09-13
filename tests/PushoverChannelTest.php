@@ -2,16 +2,16 @@
 
 namespace NotificationChannels\Pushover\Test;
 
-use Mockery;
 use Exception;
-use Orchestra\Testbench\TestCase;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Notifications\Events\NotificationFailed;
+use Illuminate\Notifications\Notification;
+use Mockery;
+use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
 use NotificationChannels\Pushover\Pushover;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverMessage;
-use Illuminate\Notifications\Events\NotificationFailed;
-use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
+use Orchestra\Testbench\TestCase;
 
 class PushoverChannelTest extends TestCase
 {

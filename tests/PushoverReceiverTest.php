@@ -2,9 +2,9 @@
 
 namespace NotificationChannels\Pushover\Test;
 
-use Orchestra\Testbench\TestCase;
 use DMS\PHPUnitExtensions\ArraySubset\Assert;
 use NotificationChannels\Pushover\PushoverReceiver;
+use Orchestra\Testbench\TestCase;
 
 class PushoverReceiverTest extends TestCase
 {
