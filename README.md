@@ -112,21 +112,22 @@ public function routeNotificationForPushover() {
 ### Available Message methods
 Please note that only the message content is mandatory, all other methods are optional. The message content can be set via `content('')`, via the create method `PushoverMessage::create('')` or via the constructor `new PushoverMessage('')`.
 
-- `content($message)`: Accepts a string value for the message text.
-- `html()`: Sets the message type to [HTML](https://pushover.net/api#html).
-- `monospace()`: Sets the message type to monospace.
-- `plain()`: Sets the message type to plain text, this is the default.
-- `title($title)`: Accepts a string value for the message title.
-- `time($timestamp)`: Accepts either a `Carbon` object or a UNIX timestamp.
-- `url($url[, $title])`: Accepts a string value for a [supplementary url](https://pushover.net/api#urls) and an optional string value for the title of the url.
-- `sound($sound)`: Accepts a string value for the [notification sound](https://pushover.net/api#sounds).
-- `priority($priority[, $retryTimeout, $expireAfter])`: Accepts an integer value for the priority and, when the priority is set to emergency, also an integer value for the retry timeout and expiry time (in seconds). Priority values are available as constants: `PushoverMessage::LOWEST_PRIORITY`, `PushoverMessage::LOW_PRIORITY`, `PushoverMessage::NORMAL_PRIORITY` and `PushoverMessage::EMERGENCY_PRIORITY`.
-- `lowestPriority()`: Sets the priority to the lowest priority.
-- `lowPriority()`: Sets the priority to low.
-- `normalPriority()`: Sets the priority to normal.
-- `highPriority()`: Sets the priority to high.
-- `emergencyPriority($retryTimeout, $expireAfter)`: Sets the priority to emergency and accepts integer values for the retry timeout and expiry time (in seconds).
-
+Method | Description
+-| -
+`content($message)` | Accepts a string value for the message text. 
+`html()` | Sets the message type to [HTML](https://pushover.net/api#html).
+`monospace()` | Sets the message type to monospace.
+`plain()` | Sets the message type to plain text, this is the default.
+`title($title)` | Accepts a string value for the message title.
+`time($timestamp)` | Accepts either a `Carbon` object or a UNIX timestamp.
+`url($url[, $title])` | Accepts a string value for a [supplementary url](https://pushover.net/api#urls) and an optional string value for the title of the url.
+`sound($sound)` | Accepts a string value for the [notification sound](https://pushover.net/api#sounds).
+`priority($priority[, $retryTimeout, $expireAfter])` | Accepts an integer value for the priority and, when the priority is set to emergency, also an integer value for the retry timeout and expiry time (in seconds). Priority values are available as constants | `PushoverMessage::LOWEST_PRIORITY`, `PushoverMessage::LOW_PRIORITY`, `PushoverMessage::NORMAL_PRIORITY` and `PushoverMessage::EMERGENCY_PRIORITY`.
+`lowestPriority()` | Sets the priority to the lowest priority.
+`lowPriority()` | Sets the priority to low.
+`normalPriority()` | Sets the priority to normal.
+`highPriority()` | Sets the priority to high.
+`emergencyPriority($retryTimeout, $expireAfter)` | Sets the priority to emergency and accepts integer values for the retry timeout and expiry time (in seconds).
 
 ## Changelog
 
