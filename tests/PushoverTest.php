@@ -2,14 +2,14 @@
 
 namespace NotificationChannels\Pushover\Test;
 
-use Mockery;
 use Exception;
-use Orchestra\Testbench\TestCase;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
-use NotificationChannels\Pushover\Pushover;
+use Mockery;
 use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
 use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
+use NotificationChannels\Pushover\Pushover;
+use Orchestra\Testbench\TestCase;
 
 class PushoverTest extends TestCase
 {

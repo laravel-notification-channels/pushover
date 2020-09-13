@@ -2,9 +2,9 @@
 
 namespace NotificationChannels\Pushover;
 
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
+use Illuminate\Notifications\Notification;
 use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
 
 class PushoverChannel

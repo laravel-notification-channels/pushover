@@ -2,14 +2,14 @@
 
 namespace NotificationChannels\Pushover\Test;
 
-use Mockery;
-use Orchestra\Testbench\TestCase;
 use GuzzleHttp\Client as HttpClient;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Notifications\Notification;
+use Mockery;
 use NotificationChannels\Pushover\Pushover;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverMessage;
+use Orchestra\Testbench\TestCase;
 
 class IntegrationTest extends TestCase
 {
