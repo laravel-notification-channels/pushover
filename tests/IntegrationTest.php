@@ -56,6 +56,8 @@ class IntegrationTest extends TestCase
             'sound' => 'boing',
             'url' => 'http://example.com',
             'url_title' => 'Example Website',
+            'html' => false,
+            'monospace' => false,
         ]);
 
         $pushover = new Pushover($this->guzzleClient, 'global-application-token');
@@ -70,7 +72,8 @@ class IntegrationTest extends TestCase
     /** @test */
     public function it_can_send_a_pushover_notification_with_an_overridden_token()
     {
-        $message = (new PushoverMessage('Message text'))
+        $message = (new PushoverMessage('Message <b>text</b>'))
+            ->html()
             ->title('Message title')
             ->emergencyPriority(60, 600)
             ->time(123456789)
@@ -81,7 +84,7 @@ class IntegrationTest extends TestCase
             'token' => 'overridden-application-token',
             'user' => 'pushover-key',
             'device' => 'iphone,desktop',
-            'message' => 'Message text',
+            'message' => 'Message <b>text</b>',
             'title' => 'Message title',
             'priority' => 2,
             'retry' => 60,
@@ -90,6 +93,8 @@ class IntegrationTest extends TestCase
             'sound' => 'boing',
             'url' => 'http://example.com',
             'url_title' => 'Example Website',
+            'html' => true,
+            'monospace' => false,
         ]);
 
         $pushover = new Pushover($this->guzzleClient, 'global-application-token');

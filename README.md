@@ -113,6 +113,9 @@ public function routeNotificationForPushover() {
 Please note that only the message content is mandatory, all other methods are optional. The message content can be set via `content('')`, via the create method `PushoverMessage::create('')` or via the constructor `new PushoverMessage('')`.
 
 - `content($message)`: Accepts a string value for the message text.
+- `html()`: Sets the message type to [HTML](https://pushover.net/api#html).
+- `monospace()`: Sets the message type to monospace.
+- `plain()`: Sets the message type to plain text, this is the default.
 - `title($title)`: Accepts a string value for the message title.
 - `time($timestamp)`: Accepts either a `Carbon` object or a UNIX timestamp.
 - `url($url[, $title])`: Accepts a string value for a [supplementary url](https://pushover.net/api#urls) and an optional string value for the title of the url.

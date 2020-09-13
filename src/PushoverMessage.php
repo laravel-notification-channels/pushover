@@ -15,6 +15,15 @@ class PushoverMessage
     public $content;
 
     /**
+     * The format of the message.
+     *
+     * Either "plain", "html" or "monospace".
+     *
+     * @var string
+     */
+    public $format = self::FORMAT_PLAIN;
+
+    /**
      * The (optional) title of the message.
      *
      * @var string
@@ -73,6 +82,13 @@ class PushoverMessage
     public $sound;
 
     /**
+     * Message formats.
+     */
+    const FORMAT_PLAIN = 0;
+    const FORMAT_HTML = 1;
+    const FORMAT_MONOSPACE = 2;
+
+    /**
      * Message priorities.
      */
     const LOWEST_PRIORITY = -2;
@@ -108,6 +124,42 @@ class PushoverMessage
     public function content($content)
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Set the formatting type to plain text.
+     *
+     * @return $this
+     */
+    public function plain()
+    {
+        $this->format = static::FORMAT_PLAIN;
+
+        return $this;
+    }
+
+    /**
+     * Set the formatting type to HTML.
+     *
+     * @return $this
+     */
+    public function html()
+    {
+        $this->format = static::FORMAT_HTML;
+
+        return $this;
+    }
+
+    /**
+     * Set the formatting type to monospace.
+     *
+     * @return $this
+     */
+    public function monospace()
+    {
+        $this->format = self::FORMAT_MONOSPACE;
 
         return $this;
     }
@@ -260,6 +312,8 @@ class PushoverMessage
             'sound' => $this->sound,
             'retry' => $this->retry,
             'expire' => $this->expire,
+            'html' => $this->format === static::FORMAT_HTML,
+            'monospace' => $this->format === static::FORMAT_MONOSPACE,
         ];
     }
 

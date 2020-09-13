@@ -51,6 +51,30 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_the_message_format_to_plain()
+    {
+        $this->message->plain();
+
+        $this->assertEquals(PushoverMessage::FORMAT_PLAIN, $this->message->format);
+    }
+
+    /** @test */
+    public function it_can_set_the_message_format_to_html()
+    {
+        $this->message->html();
+
+        $this->assertEquals(PushoverMessage::FORMAT_HTML, $this->message->format);
+    }
+
+    /** @test */
+    public function it_can_set_the_message_format_to_monospace()
+    {
+        $this->message->monospace();
+
+        $this->assertEquals(PushoverMessage::FORMAT_MONOSPACE, $this->message->format);
+    }
+
+    /** @test */
     public function it_can_set_a_title()
     {
         $this->message->title('message title');
