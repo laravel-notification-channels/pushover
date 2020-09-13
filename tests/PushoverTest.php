@@ -80,7 +80,7 @@ class PushoverTest extends TestCase
         $guzzleResponse->shouldReceive('getStatusCode')->andReturn(400);
         $guzzleResponse->shouldReceive('getBody')->andReturn('');
 
-        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException(null, $guzzleRequest, $guzzleResponse));
+        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException('message', $guzzleRequest, $guzzleResponse));
 
         $this->pushover->send([]);
     }
@@ -96,7 +96,7 @@ class PushoverTest extends TestCase
         $guzzleResponse->shouldReceive('getStatusCode')->andReturn(400);
         $guzzleResponse->shouldReceive('getBody')->andReturn('{"errors": ["error_message_1", "error_message_2"]}');
 
-        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException(null, $guzzleRequest, $guzzleResponse));
+        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException('message', $guzzleRequest, $guzzleResponse));
 
         $this->pushover->send([]);
     }
@@ -109,7 +109,7 @@ class PushoverTest extends TestCase
 
         $guzzleRequest = Mockery::mock(\Psr\Http\Message\RequestInterface::class);
 
-        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException(null, $guzzleRequest, null));
+        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException('message', $guzzleRequest, null));
 
         $this->pushover->send([]);
     }
