@@ -12,6 +12,7 @@
         }
     ],
     "require": {
+        "ext-exif": "*",
         "php": ">=7.3",
         "guzzlehttp/guzzle": "^7.0.1",
         "illuminate/notifications": "^8.0",
