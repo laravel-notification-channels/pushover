@@ -7,16 +7,26 @@ use Psr\Http\Message\ResponseInterface;
 
 class CouldNotSendNotification extends Exception
 {
-    public static function serviceRespondedWithAnError(ResponseInterface $response)
+    public static function serviceRespondedWithAnError(ResponseInterface $response, $notifiable)
     {
         $statusCode = $response->getStatusCode();
 
         $result = json_decode($response->getBody());
 
+        $exceptionMessage = sprintf(
+            "Pushover responded with an error (%s) for notifiable '%s' with id '%s'",
+            $statusCode,
+            get_class($notifiable),
+            $notifiable->getKey()
+        );
+
         if ($result && isset($result->errors)) {
-            return new static('Pushover responded with an error ('.$statusCode.'): '.implode(', ', $result->errors));
+            $exceptionMessage = sprintf(
+                "$exceptionMessage: %s",
+                implode(', ', $result->errors)
+            );
         }
 
-        return new static('Pushover responded with an error ('.$statusCode.').');
+        return new static($exceptionMessage, $statusCode);
     }
 }
