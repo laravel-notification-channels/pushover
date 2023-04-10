@@ -105,8 +105,7 @@ class PushoverMessage
     const EMERGENCY_PRIORITY = 2;
 
     /**
-     * @param  string $content
-     *
+     * @param  string  $content
      * @return static
      */
     public static function create($content = '')
@@ -204,8 +203,8 @@ class PushoverMessage
     /**
      * Set a supplementary url for the Pushover message.
      *
-     * @param  string $url
-     * @param  string $title
+     * @param  string  $url
+     * @param  string  $title
      * @return $this
      */
     public function url($url, $title = null)
@@ -232,7 +231,7 @@ class PushoverMessage
     /**
      * Set the image for attaching to the Pushover message. Either full or relative server path or a URL.
      *
-     * @param string $image
+     * @param  string  $image
      * @return $this
      */
     public function image($image)
@@ -344,6 +343,7 @@ class PushoverMessage
      * @param  int  $priority
      * @param  int  $retry
      * @param  int  $expire
+     *
      * @throws EmergencyNotificationRequiresRetryAndExpire
      */
     protected function noEmergencyWithoutRetryOrExpire($priority, $retry, $expire)

@@ -10,6 +10,7 @@ class PushoverReceiver
 
     /**
      * PushoverReceiver constructor.
+     *
      * @param  $key  User or group key.
      */
     protected function __construct($key)

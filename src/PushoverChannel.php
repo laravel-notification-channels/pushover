@@ -18,7 +18,7 @@ class PushoverChannel
     /**
      * Create a new Pushover channel instance.
      *
-     * @param  Pushover $pushover
+     * @param  Pushover  $pushover
      */
     public function __construct(Pushover $pushover, Dispatcher $events)
     {
@@ -29,8 +29,8 @@ class PushoverChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
+     * @param  mixed  $notifiable
+     * @param  \Illuminate\Notifications\Notification  $notification
      *
      * @throws \NotificationChannels\Pushover\Exceptions\CouldNotSendNotification
      */
