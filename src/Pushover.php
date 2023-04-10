@@ -87,7 +87,9 @@ class Pushover
             );
         } catch (RequestException $exception) {
             if ($exception->getResponse()) {
-                throw CouldNotSendNotification::serviceRespondedWithAnError($exception->getResponse());
+                throw CouldNotSendNotification::serviceRespondedWithAnError(
+                    $exception->getResponse(), $notifiable
+                );
             }
             throw ServiceCommunicationError::communicationFailed($exception);
         } catch (Exception $exception) {
