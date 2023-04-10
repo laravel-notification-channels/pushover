@@ -82,6 +82,13 @@ class PushoverMessage
     public $sound;
 
     /**
+     * The (optional) image to be attached to the message.
+     *
+     * @var string
+     */
+    public $image;
+
+    /**
      * Message formats.
      */
     const FORMAT_PLAIN = 0;
@@ -223,6 +230,19 @@ class PushoverMessage
     }
 
     /**
+     * Set the image for attaching to the Pushover message. Either full or relative server path or a URL.
+     *
+     * @param string $image
+     * @return $this
+     */
+    public function image($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
      * Set the priority of the Pushover message.
      * Retry and expire are mandatory when setting the priority to emergency.
      *
@@ -310,6 +330,7 @@ class PushoverMessage
             'url' => $this->url,
             'url_title' => $this->urlTitle,
             'sound' => $this->sound,
+            'image' => $this->image,
             'retry' => $this->retry,
             'expire' => $this->expire,
             'html' => $this->format === static::FORMAT_HTML,
