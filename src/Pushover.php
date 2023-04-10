@@ -33,7 +33,7 @@ class Pushover
 
     /**
      * @param  HttpClient  $http
-     * @param  string $token
+     * @param  string  $token
      */
     public function __construct(HttpClient $http, $token)
     {
@@ -49,6 +49,7 @@ class Pushover
      *
      * @param  array  $params
      * @return \Psr\Http\Message\ResponseInterface
+     *
      * @throws CouldNotSendNotification
      */
     public function send($params)
