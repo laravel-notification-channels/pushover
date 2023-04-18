@@ -13,9 +13,10 @@ This package makes it easy to send Pushover notifications with Laravel Notificat
 ## Contents
 
 - [Installation](#installation)
-	- [Setting up your Pushover account](#setting-up-your-pushover-account)
+    - [Setting up your Pushover account](#setting-up-your-pushover-account)
 - [Usage](#usage)
-	- [Available Message methods](#available-message-methods)
+    - [Advanved usage and configuration](#advanced-usage-and-configuration)
+    - [Available Message methods](#available-message-methods)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
@@ -27,7 +28,7 @@ This package makes it easy to send Pushover notifications with Laravel Notificat
 
 You can install the package via composer:
 
-``` bash
+```bash
 composer require laravel-notification-channels/pushover
 ```
 
@@ -35,20 +36,19 @@ composer require laravel-notification-channels/pushover
 
 To start sending messages via Pushover, you have to [register an application](https://pushover.net/apps/build).
 Add the generated Pushover application token to the services config file:
+
 ```php
 // config/services.php
-...
 'pushover' => [
     'token' => 'YOUR_APPLICATION_TOKEN',
 ],
-...
 ```
 
 ## Usage
 
 Now you can use the channel in your `via()` method inside the notification as well as send a push notification:
 
-``` php
+```php
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverMessage;
 use Illuminate\Notifications\Notification;
@@ -71,18 +71,21 @@ class AccountApproved extends Notification
 }
 ```
 
-Make sure there is a `routeNotificationForPushover` method on your notifiable model, for instance:
-``` php
-...
+To send Pushover notifications to the notifiable entity, add the `routeNotificationForPushover` method to that model. 
+Usually, this is the User model. The `pushover_key` could be a database field and editable by the user itself.
+
+```php
 public function routeNotificationForPushover()
 {
     return $this->pushover_key;
 }
 ```
 
+### Advanced usage and configuration
+
 If you want to specify specific devices, you can return a `PushoverReceiver` object.
+
 ```php
-...
 public function routeNotificationForPushover() {
     return PushoverReceiver::withUserKey('pushover-key')
         ->toDevice('iphone')
@@ -92,9 +95,10 @@ public function routeNotificationForPushover() {
 }
 ```
 
-If you want to (dynamically) overrule the application token from the services config, e.g. because each user holds their own application token, return a `PushoverReceiver` object like this:
+If you want to (dynamically) overrule the application token from the services config, e.g. because each user holds their
+own application token, return a `PushoverReceiver` object like this:
+
 ```php
-...
 public function routeNotificationForPushover() {
     return PushoverReceiver::withUserKey('pushover-key')
         ->withApplicationToken('app-token');
@@ -102,40 +106,39 @@ public function routeNotificationForPushover() {
 ```
 
 You can also send a message to a Pushover group:
+
 ```php
-...
 public function routeNotificationForPushover() {
     return PushoverReceiver::withGroupKey('pushover-group-key');
 }
 ```
 
 ### Available Message methods
-Please note that only the message content is mandatory, all other methods are optional. The message content can be set via `content('')`, via the create method `PushoverMessage::create('')` or via the constructor `new PushoverMessage('')`.
 
-Method | Description
--| -
-`content($message)` | Accepts a string value for the message text. 
-`html()` | Sets the message type to [HTML](https://pushover.net/api#html).
-`monospace()` | Sets the message type to monospace.
-`plain()` | Sets the message type to plain text, this is the default.
-`title($title)` | Accepts a string value for the message title.
-`time($timestamp)` | Accepts either a `Carbon` object or a UNIX timestamp.
-`url($url[, $title])` | Accepts a string value for a [supplementary url](https://pushover.net/api#urls) and an optional string value for the title of the url.
-`sound($sound)` | Accepts a string value for the [notification sound](https://pushover.net/api#sounds).
-`image($image)` | Accepts a string value for the image location (either full or relative server path or a URL). If there is any error with the file (too big, not an image) it will silently send the message without the image attachment.
-`priority($priority[, $retryTimeout, $expireAfter])` | Accepts an integer value for the priority and, when the priority is set to emergency, also an integer value for the retry timeout and expiry time (in seconds). Priority values are available as constants | `PushoverMessage::LOWEST_PRIORITY`, `PushoverMessage::LOW_PRIORITY`, `PushoverMessage::NORMAL_PRIORITY` and `PushoverMessage::EMERGENCY_PRIORITY`.
-`lowestPriority()` | Sets the priority to the lowest priority.
-`lowPriority()` | Sets the priority to low.
-`normalPriority()` | Sets the priority to normal.
-`highPriority()` | Sets the priority to high.
-`emergencyPriority($retryTimeout, $expireAfter)` | Sets the priority to emergency and accepts integer values for the retry timeout and expiry time (in seconds).
+| Method | Description |
+|--------|-------------|
+| `content($message)`    | Accepts a string value for the message text.  |
+| `html()`               | Sets the message type to [HTML](https://pushover.net/api#html). |
+| `monospace()`          | Sets the message type to monospace. |
+| `plain()`              | Sets the message type to plain text, this is the default. |
+| `title($title)`        | Accepts a string value for the message title. |
+| `time($timestamp)`     | Accepts either a `Carbon` object or a UNIX timestamp. |
+| `url($url[, $title])`  | Accepts a string value for a [supplementary url](https://pushover.net/api#urls) and an optional string value for the title of the url. |
+| `sound($sound)`        | Accepts a string value for the [notification sound](https://pushover.net/api#sounds). |
+| `image($image)`        | Accepts a string value for the image location (either full or relative server path or a URL). If there is any error with the file (too big, not an image) it will silently send the message without the image attachment. |
+| `priority($priority[, $retryTimeout, $expireAfter])` | Accepts an integer value for the priority and, when the priority is set to emergency, also an integer value for the retry timeout and expiry time (in seconds). Priority values are available as constants | `PushoverMessage::LOWEST_PRIORITY`, `PushoverMessage::LOW_PRIORITY`, `PushoverMessage::NORMAL_PRIORITY` and `PushoverMessage::EMERGENCY_PRIORITY`. |
+| `lowestPriority()`     | Sets the priority to the lowest priority. |
+| `lowPriority()`        | Sets the priority to low. |
+| `normalPriority()`     | Sets the priority to normal. |
+| `highPriority()`       | Sets the priority to high. |
+| `emergencyPriority($retryTimeout, $expireAfter)` | Sets the priority to emergency and accepts integer values for the retry timeout and expiry time (in seconds). |
 
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
 ## Testing
-    
+
 ``` bash
 $ composer test
 ```
