@@ -5,6 +5,7 @@ namespace NotificationChannels\Pushover;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
 use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
 
 class PushoverChannel
@@ -41,6 +42,12 @@ class PushoverChannel
         }
 
         if (is_string($pushoverReceiver)) {
+            // From https://pushover.net/api:
+            // "User and group identifiers are 30 characters long, ..."
+            if (strlen($pushoverReceiver) !== 30) {
+                throw CouldNotSendNotification::pushoverKeyHasWrongLength($notifiable);
+            }
+
             $pushoverReceiver = PushoverReceiver::withUserKey($pushoverReceiver);
         }
 
