@@ -55,7 +55,7 @@ class PushoverChannel
 
     protected function fireFailedEvent($notifiable, $notification, $message)
     {
-        $this->events->fire(
+        $this->events->dispatch(
             new NotificationFailed($notifiable, $notification, 'pushover', [$message])
         );
     }
