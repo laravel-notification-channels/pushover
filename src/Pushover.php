@@ -55,11 +55,12 @@ class Pushover
      * @link  https://pushover.net/api
      *
      * @param  array  $params
+     * @param mixed $notifiable
      * @return \Psr\Http\Message\ResponseInterface
      *
      * @throws CouldNotSendNotification
      */
-    public function send($params)
+    public function send($params, $notifiable)
     {
         try {
             $multipart = [];

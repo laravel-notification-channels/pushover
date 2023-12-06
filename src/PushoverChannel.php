@@ -47,7 +47,10 @@ class PushoverChannel
         $message = $notification->toPushover($notifiable);
 
         try {
-            $this->pushover->send(array_merge($message->toArray(), $pushoverReceiver->toArray()));
+            $this->pushover->send(
+                array_merge($message->toArray(), $pushoverReceiver->toArray()),
+                $notifiable
+            );
         } catch (ServiceCommunicationError $serviceCommunicationError) {
             $this->fireFailedEvent($notifiable, $notification, $serviceCommunicationError->getMessage());
         }
