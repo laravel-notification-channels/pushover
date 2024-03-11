@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Pushover;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
@@ -10,16 +11,15 @@ use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
 
 class PushoverChannel
 {
-    /** @var Pushover */
-    protected $pushover;
+    protected Pushover $pushover;
 
-    /** @var Dispatcher */
-    protected $events;
+    protected Dispatcher $events;
 
     /**
      * Create a new Pushover channel instance.
      *
-     * @param  Pushover  $pushover
+     * @param Pushover   $pushover
+     * @param Dispatcher $events
      */
     public function __construct(Pushover $pushover, Dispatcher $events)
     {
@@ -30,12 +30,13 @@ class PushoverChannel
     /**
      * Send the given notification.
      *
-     * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param mixed        $notifiable
+     * @param Notification $notification
      *
-     * @throws \NotificationChannels\Pushover\Exceptions\CouldNotSendNotification
+     * @throws CouldNotSendNotification
+     * @throws GuzzleException
      */
-    public function send($notifiable, Notification $notification)
+    public function send(mixed $notifiable, Notification $notification): void
     {
         if (! $pushoverReceiver = $notifiable->routeNotificationFor('pushover')) {
             return;
@@ -63,7 +64,7 @@ class PushoverChannel
         }
     }
 
-    protected function fireFailedEvent($notifiable, $notification, $message)
+    protected function fireFailedEvent($notifiable, $notification, $message): void
     {
         $this->events->dispatch(
             new NotificationFailed($notifiable, $notification, 'pushover', [$message])

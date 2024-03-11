@@ -6,6 +6,11 @@ class Notifiable
 {
     public function routeNotificationFor($channel)
     {
-        return 'pushover-key';
+        return 'pushover-key-30characters-long';
+    }
+
+    public function getKey()
+    {
+        return '1';
     }
 }

@@ -4,9 +4,11 @@ namespace NotificationChannels\Pushover;
 
 use Exception;
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
 use NotificationChannels\Pushover\Exceptions\ServiceCommunicationError;
+use Psr\Http\Message\ResponseInterface;
 
 class Pushover
 {
@@ -22,27 +24,27 @@ class Pushover
      *
      * @var string
      */
-    protected $pushoverApiUrl = 'https://api.pushover.net/1/messages.json';
+    protected string $pushoverApiUrl = 'https://api.pushover.net/1/messages.json';
 
     /**
      * The HTTP client instance.
      *
-     * @var \GuzzleHttp\Client
+     * @var HttpClient
      */
-    protected $http;
+    protected HttpClient $http;
 
     /**
      * Pushover App Token.
      *
      * @var string
      */
-    protected $token;
+    protected string $token;
 
     /**
-     * @param  HttpClient  $http
-     * @param  string  $token
+     * @param HttpClient $http
+     * @param string     $token
      */
-    public function __construct(HttpClient $http, $token)
+    public function __construct(HttpClient $http, string $token)
     {
         $this->http = $http;
 
@@ -54,13 +56,15 @@ class Pushover
      *
      * @link  https://pushover.net/api
      *
-     * @param  array  $params
+     * @param array $params
      * @param mixed $notifiable
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      *
      * @throws CouldNotSendNotification
+     * @throws ServiceCommunicationError
+     * @throws GuzzleException
      */
-    public function send($params, $notifiable)
+    public function send(array $params, mixed $notifiable): ResponseInterface
     {
         try {
             $multipart = [];
@@ -68,7 +72,7 @@ class Pushover
             foreach ($this->paramsWithToken($params) as $name => $contents) {
                 if ($name !== 'image') {
                     $multipart[] = [
-                        'name'     => $name,
+                        'name' => $name,
                         'contents' => $contents,
                     ];
                 } else {
@@ -80,6 +84,7 @@ class Pushover
                 }
             }
 
+            //dd($multipart);
             return $this->http->post(
                 $this->pushoverApiUrl,
                 [
@@ -101,10 +106,10 @@ class Pushover
     /**
      * Merge token into parameters array, unless it has been set on the PushoverReceiver.
      *
-     * @param  array  $params
+     * @param array $params
      * @return array
      */
-    protected function paramsWithToken($params)
+    protected function paramsWithToken(array $params): array
     {
         return array_merge([
             'token' => $this->token,
@@ -119,9 +124,14 @@ class Pushover
      *
      * @param $file
      * @return array|null
+     * @throws GuzzleException
      */
     private function getImageData($file): ?array
     {
+        if (empty($file)) {
+            return null;
+        }
+
         try {
             // check if $file is not too big
             if (is_file($file) && is_readable($file)) {
@@ -141,7 +151,7 @@ class Pushover
                 }
 
                 // some servers may not return the "Content-Length" header
-                $fileSizeChecked = (bool) $contentLength;
+                $fileSizeChecked = (bool)$contentLength;
             }
 
             // check if $file is an image
@@ -153,7 +163,7 @@ class Pushover
 
             $contents = file_get_contents($file);
             // if not checked before, finally check the file size after reading it
-            if (! $fileSizeChecked && strlen($contents) > self::IMAGE_SIZE_LIMIT) {
+            if (!$fileSizeChecked && strlen($contents) > self::IMAGE_SIZE_LIMIT) {
                 return null;
             }
         } catch (Exception $exception) {
@@ -162,10 +172,10 @@ class Pushover
 
         return [
             // name of the field holding the image must be 'attachment' (https://pushover.net/api#attachments)
-            'name'     => 'attachment',
+            'name' => 'attachment',
             'contents' => $contents,
             'filename' => basename($file),
-            'headers'  => [
+            'headers' => [
                 'Content-Type' => $contentType,
             ],
         ];

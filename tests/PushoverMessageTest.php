@@ -19,7 +19,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_accept_a_message_when_constructing_a_message()
+    public function it_can_accept_a_message_when_constructing_a_message(): void
     {
         $message = new PushoverMessage('message text');
 
@@ -27,7 +27,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_message()
+    public function it_can_create_a_message(): void
     {
         $message = PushoverMessage::create();
 
@@ -35,7 +35,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_accept_a_message_when_creating_a_message()
+    public function it_can_accept_a_message_when_creating_a_message(): void
     {
         $message = PushoverMessage::create('message text');
 
@@ -43,7 +43,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_content()
+    public function it_can_set_content(): void
     {
         $this->message->content('message text');
 
@@ -51,7 +51,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_the_message_format_to_plain()
+    public function it_can_set_the_message_format_to_plain(): void
     {
         $this->message->plain();
 
@@ -59,7 +59,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_the_message_format_to_html()
+    public function it_can_set_the_message_format_to_html(): void
     {
         $this->message->html();
 
@@ -67,7 +67,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_the_message_format_to_monospace()
+    public function it_can_set_the_message_format_to_monospace(): void
     {
         $this->message->monospace();
 
@@ -75,7 +75,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_a_title()
+    public function it_can_set_a_title(): void
     {
         $this->message->title('message title');
 
@@ -83,7 +83,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_a_time()
+    public function it_can_set_a_time(): void
     {
         $this->message->time(123456789);
 
@@ -91,7 +91,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_a_time_from_a_carbon_object()
+    public function it_can_set_a_time_from_a_carbon_object(): void
     {
         $carbon = Carbon::now();
 
@@ -101,7 +101,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_an_url()
+    public function it_can_set_an_url(): void
     {
         $this->message->url('http://example.com');
 
@@ -109,7 +109,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_an_url_with_a_title()
+    public function it_can_set_an_url_with_a_title(): void
     {
         $this->message->url('http://example.com', 'Go to example website');
 
@@ -118,7 +118,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_a_sound()
+    public function it_can_set_a_sound(): void
     {
         $this->message->sound('boing');
 
@@ -126,7 +126,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_a_priority()
+    public function it_can_set_a_priority(): void
     {
         $this->message->priority(PushoverMessage::NORMAL_PRIORITY);
 
@@ -134,7 +134,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_a_priority_with_retry_and_expire()
+    public function it_can_set_a_priority_with_retry_and_expire(): void
     {
         $this->message->priority(PushoverMessage::EMERGENCY_PRIORITY, 60, 600);
 
@@ -144,7 +144,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_cannot_set_priority_to_emergency_when_not_providing_a_retry_and_expiry_time()
+    public function it_cannot_set_priority_to_emergency_when_not_providing_a_retry_and_expiry_time(): void
     {
         $this->expectException(EmergencyNotificationRequiresRetryAndExpire::class);
 
@@ -152,7 +152,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_the_priority_to_the_lowest()
+    public function it_can_set_the_priority_to_the_lowest(): void
     {
         $this->message->lowestPriority();
 
@@ -160,7 +160,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_the_priority_to_low()
+    public function it_can_set_the_priority_to_low(): void
     {
         $this->message->lowPriority();
 
@@ -168,7 +168,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_the_priority_to_normal()
+    public function it_can_set_the_priority_to_normal(): void
     {
         $this->message->normalPriority();
 
@@ -176,7 +176,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_the_priority_to_high()
+    public function it_can_set_the_priority_to_high(): void
     {
         $this->message->highPriority();
 
@@ -184,7 +184,7 @@ class PushoverMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_the_priority_to_emergency()
+    public function it_can_set_the_priority_to_emergency(): void
     {
         $this->message->emergencyPriority(60, 600);
 
