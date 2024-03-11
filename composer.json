@@ -23,6 +23,9 @@
         "orchestra/testbench": "^8.0 || ^9.0",
         "dms/phpunit-arraysubset-asserts": ">=0.1.0"
     },
+    "suggest": {
+        "ext-exif": "Required for image attachment support"
+    },
     "autoload": {
         "psr-4": {
             "NotificationChannels\\Pushover\\": "src"
