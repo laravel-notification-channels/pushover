@@ -29,4 +29,15 @@ class CouldNotSendNotification extends Exception
 
         return new static($exceptionMessage, $statusCode);
     }
+
+    public static function pushoverKeyHasWrongLength($notifiable)
+    {
+        $exceptionMessage = sprintf(
+            "Pushover key has wrong length for notifiable '%s' with id '%s'. It needs to be 30 characters long.",
+            get_class($notifiable),
+            $notifiable->getKey()
+        );
+
+        return new static($exceptionMessage);
+    }
 }
