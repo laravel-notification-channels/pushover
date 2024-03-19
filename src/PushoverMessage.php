@@ -24,23 +24,23 @@ class PushoverMessage
     /**
      * The (optional) title of the message.
      *
-     * @var string
+     * @var string|null
      */
-    public string $title;
+    public string|null $title = null;
 
     /**
      * The (optional) timestamp of the message.
      *
-     * @var int
+     * @var int|null
      */
-    public int $timestamp;
+    public int|null $timestamp = null;
 
     /**
      * The (optional) priority of the message.
      *
-     * @var int
+     * @var int|null
      */
-    public int $priority;
+    public int|null $priority = null;
 
     /**
      * The (optional) timeout between retries when sending a message
@@ -48,7 +48,7 @@ class PushoverMessage
      *
      * @var int|null
      */
-    public int|null $retry;
+    public int|null $retry = null;
 
     /**
      * The (optional) expire time of a message with an emergency priority.
@@ -56,35 +56,35 @@ class PushoverMessage
      *
      * @var int|null
      */
-    public int|null $expire;
+    public int|null $expire = null;
 
     /**
      * The (optional) supplementary url of the message.
      *
-     * @var string
+     * @var string|null
      */
-    public string $url;
+    public string|null $url = null;
 
     /**
      * The (optional) supplementary url title of the message.
      *
-     * @var string
+     * @var string|null
      */
-    public string $urlTitle;
+    public string|null $urlTitle = null;
 
     /**
      * The (optional) sound of the message.
      *
-     * @var string
+     * @var string|null
      */
-    public string $sound;
+    public string|null $sound = null;
 
     /**
      * The (optional) image to be attached to the message.
      *
-     * @var string
+     * @var string|null
      */
-    public string $image = '';
+    public string|null $image = null;
 
     /**
      * Message formats.
