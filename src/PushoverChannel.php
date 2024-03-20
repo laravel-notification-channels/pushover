@@ -18,8 +18,8 @@ class PushoverChannel
     /**
      * Create a new Pushover channel instance.
      *
-     * @param Pushover   $pushover
-     * @param Dispatcher $events
+     * @param  Pushover  $pushover
+     * @param  Dispatcher  $events
      */
     public function __construct(Pushover $pushover, Dispatcher $events)
     {
@@ -30,8 +30,8 @@ class PushoverChannel
     /**
      * Send the given notification.
      *
-     * @param mixed        $notifiable
-     * @param Notification $notification
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
      *
      * @throws CouldNotSendNotification
      * @throws GuzzleException

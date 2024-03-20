@@ -41,8 +41,8 @@ class Pushover
     protected string $token;
 
     /**
-     * @param HttpClient $http
-     * @param string     $token
+     * @param  HttpClient  $http
+     * @param  string  $token
      */
     public function __construct(HttpClient $http, string $token)
     {
@@ -56,8 +56,8 @@ class Pushover
      *
      * @link  https://pushover.net/api
      *
-     * @param array $params
-     * @param mixed $notifiable
+     * @param  array  $params
+     * @param  mixed  $notifiable
      * @return ResponseInterface
      *
      * @throws CouldNotSendNotification
@@ -106,7 +106,7 @@ class Pushover
     /**
      * Merge token into parameters array, unless it has been set on the PushoverReceiver.
      *
-     * @param array $params
+     * @param  array  $params
      * @return array
      */
     protected function paramsWithToken(array $params): array
@@ -122,8 +122,9 @@ class Pushover
      * If there is any error (problem with reading the file, file size exceeds the limit, the file is not an image),
      * silently returns null and sends the message without image attachment.
      *
-     * @param $file
+     * @param  $file
      * @return array|null
+     *
      * @throws GuzzleException
      */
     private function getImageData($file): ?array
@@ -151,7 +152,7 @@ class Pushover
                 }
 
                 // some servers may not return the "Content-Length" header
-                $fileSizeChecked = (bool)$contentLength;
+                $fileSizeChecked = (bool) $contentLength;
             }
 
             // check if $file is an image
@@ -163,7 +164,7 @@ class Pushover
 
             $contents = file_get_contents($file);
             // if not checked before, finally check the file size after reading it
-            if (!$fileSizeChecked && strlen($contents) > self::IMAGE_SIZE_LIMIT) {
+            if (! $fileSizeChecked && strlen($contents) > self::IMAGE_SIZE_LIMIT) {
                 return null;
             }
         } catch (Exception $exception) {

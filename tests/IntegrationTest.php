@@ -109,7 +109,7 @@ class IntegrationTest extends TestCase
     protected function requestWillBeSentToPushoverWith($params): void
     {
         $multipartData = array_map(
-            fn($key, $value) => ['name' => $key, 'contents' => $value],
+            fn ($key, $value) => ['name' => $key, 'contents' => $value],
             array_keys($params),
             array_values($params)
         );
