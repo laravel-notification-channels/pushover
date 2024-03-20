@@ -43,56 +43,60 @@ class PushoverChannelTest extends TestCase
     }
 
     /** @test */
-    public function it_can_send_a_message_to_pushover()
+    public function it_can_send_a_message_to_pushover(): void
     {
         $notifiable = new Notifiable;
 
         $this->notification->shouldReceive('toPushover')
             ->with($notifiable)
             ->andReturn($this->message);
+
         $this->pushover->shouldReceive('send')
             ->with(Mockery::subset([
-                'user' => 'pushover-key',
+                'user' => 'pushover-key-30characters-long',
                 'device' => '',
-            ]))
+            ]), $notifiable)
             ->once();
 
         $this->channel->send($notifiable, $this->notification);
     }
 
     /** @test */
-    public function it_can_send_a_message_to_pushover_using_a_pushover_receiver()
+    public function it_can_send_a_message_to_pushover_using_a_pushover_receiver(): void
     {
         $notifiable = new NotifiableWithPushoverReceiver;
 
         $this->notification->shouldReceive('toPushover')
             ->with($notifiable)
             ->andReturn($this->message);
+
         $this->pushover->shouldReceive('send')
             ->with(Mockery::subset([
-                'user' => 'pushover-key',
+                'user' => 'pushover-key-30characters-long',
                 'device' => 'iphone,desktop',
-            ]))
+            ]), $notifiable)
             ->once();
 
         $this->channel->send($notifiable, $this->notification);
     }
 
     /** @test */
-    public function it_fires_a_notification_failed_event_when_the_communication_with_pushover_failed()
+    public function it_fires_a_notification_failed_event_when_the_communication_with_pushover_failed(): void
     {
         $this->notification->shouldReceive('toPushover')->andReturn($this->message);
         $this->pushover->shouldReceive('send')->andThrow(
             ServiceCommunicationError::communicationFailed(new Exception())
         );
 
-        $this->events->shouldReceive('fire')->with(Mockery::type(NotificationFailed::class));
+        $this->events->shouldReceive('dispatch')->with(Mockery::type(NotificationFailed::class));
 
         $this->channel->send(new Notifiable, $this->notification);
+
+        $this->expectNotToPerformAssertions();
     }
 
     /** @test */
-    public function it_does_not_send_a_message_when_notifiable_does_not_have_route_notificaton_for_pushover()
+    public function it_does_not_send_a_message_when_notifiable_does_not_have_route_notificaton_for_pushover(): void
     {
         $this->notification->shouldReceive('toPushover')->never();
 

@@ -34,7 +34,7 @@ class IntegrationTest extends TestCase
     }
 
     /** @test */
-    public function it_can_send_a_pushover_notification_with_a_global_token()
+    public function it_can_send_a_pushover_notification_with_a_global_token(): void
     {
         $message = (new PushoverMessage('Message text'))
             ->title('Message title')
@@ -45,19 +45,19 @@ class IntegrationTest extends TestCase
 
         $this->requestWillBeSentToPushoverWith([
             'token' => 'global-application-token',
-            'user' => 'pushover-key',
-            'device' => 'iphone,desktop',
             'message' => 'Message text',
             'title' => 'Message title',
-            'priority' => 2,
-            'retry' => 60,
-            'expire' => 600,
             'timestamp' => 123456789,
-            'sound' => 'boing',
+            'priority' => 2,
             'url' => 'http://example.com',
             'url_title' => 'Example Website',
+            'sound' => 'boing',
+            'retry' => 60,
+            'expire' => 600,
             'html' => false,
             'monospace' => false,
+            'user' => 'pushover-key-30characters-long',
+            'device' => 'iphone,desktop',
         ]);
 
         $pushover = new Pushover($this->guzzleClient, 'global-application-token');
@@ -70,7 +70,7 @@ class IntegrationTest extends TestCase
     }
 
     /** @test */
-    public function it_can_send_a_pushover_notification_with_an_overridden_token()
+    public function it_can_send_a_pushover_notification_with_an_overridden_token(): void
     {
         $message = (new PushoverMessage('Message <b>text</b>'))
             ->html()
@@ -82,19 +82,19 @@ class IntegrationTest extends TestCase
 
         $this->requestWillBeSentToPushoverWith([
             'token' => 'overridden-application-token',
-            'user' => 'pushover-key',
-            'device' => 'iphone,desktop',
             'message' => 'Message <b>text</b>',
             'title' => 'Message title',
-            'priority' => 2,
-            'retry' => 60,
-            'expire' => 600,
             'timestamp' => 123456789,
-            'sound' => 'boing',
+            'priority' => 2,
             'url' => 'http://example.com',
             'url_title' => 'Example Website',
+            'sound' => 'boing',
+            'retry' => 60,
+            'expire' => 600,
             'html' => true,
             'monospace' => false,
+            'user' => 'pushover-key-30characters-long',
+            'device' => 'iphone,desktop',
         ]);
 
         $pushover = new Pushover($this->guzzleClient, 'global-application-token');
@@ -106,19 +106,25 @@ class IntegrationTest extends TestCase
         $channel->send(new NotifiableWithPushoverReceiverWithToken(), $this->notification);
     }
 
-    protected function requestWillBeSentToPushoverWith($params)
+    protected function requestWillBeSentToPushoverWith($params): void
     {
+        $multipartData = array_map(
+            fn ($key, $value) => ['name' => $key, 'contents' => $value],
+            array_keys($params),
+            array_values($params)
+        );
+
         $this->guzzleClient->shouldReceive('post')
             ->with('https://api.pushover.net/1/messages.json', [
-                'form_params' => $params,
+                'multipart' => $multipartData,
             ])
             ->once();
     }
 
-    protected function ignoreEvents()
+    protected function ignoreEvents(): void
     {
         $dispatcher = Mockery::mock('Illuminate\Contracts\Events\Dispatcher');
-        $dispatcher->shouldReceive('fire');
+        $dispatcher->shouldReceive('dispatch');
         app()->instance('events', $dispatcher);
     }
 }

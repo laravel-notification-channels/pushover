@@ -10,19 +10,12 @@ class PushoverServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function boot()
+    public function boot(): void
     {
         $this->app->when(PushoverChannel::class)
             ->needs(Pushover::class)
             ->give(function () {
                 return new Pushover(new HttpClient(), config('services.pushover.token'));
             });
-    }
-
-    /**
-     * Register the application services.
-     */
-    public function register()
-    {
     }
 }

@@ -6,7 +6,7 @@ use Exception;
 
 class ServiceCommunicationError extends Exception
 {
-    public static function communicationFailed(Exception $exception)
+    public static function communicationFailed(Exception $exception): static
     {
         return new static("The communication with Pushover failed because `{$exception->getCode()} - {$exception->getMessage()}`");
     }
