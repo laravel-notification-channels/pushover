@@ -85,6 +85,12 @@ class PushoverMessage
      * @var string|null
      */
     public string|null $image = null;
+    /**
+     * The (optional) publicly-accessible url that Pushover will use to notify your system when a user
+     * acknowledges an Emergency notification
+     * @var string|null
+     */
+    public string|null $callback = null;
 
     /**
      * Message formats.
@@ -325,6 +331,20 @@ class PushoverMessage
     }
 
     /**
+     * Set the callback url used by pushover to let your system
+     * know when a emergency notification has been acknowledged
+     *
+     * @param string $url
+     * @return $this
+     */
+    public function callback(string $url): static
+    {
+        $this->callback = $url;
+
+        return $this;
+    }
+
+    /**
      * Array representation of Pushover Message.
      *
      * @return array
@@ -344,6 +364,7 @@ class PushoverMessage
             'expire' => $this->expire,
             'html' => $this->format === static::FORMAT_HTML,
             'monospace' => $this->format === static::FORMAT_MONOSPACE,
+            'callback' => $this->callback
         ];
     }
 
