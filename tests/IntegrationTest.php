@@ -56,6 +56,7 @@ class IntegrationTest extends TestCase
             'expire' => 600,
             'html' => false,
             'monospace' => false,
+            'callback' => null,
             'user' => 'pushover-key-30characters-long',
             'device' => 'iphone,desktop',
         ]);
@@ -93,6 +94,7 @@ class IntegrationTest extends TestCase
             'expire' => 600,
             'html' => true,
             'monospace' => false,
+            'callback' => null,
             'user' => 'pushover-key-30characters-long',
             'device' => 'iphone,desktop',
         ]);
@@ -109,7 +111,7 @@ class IntegrationTest extends TestCase
     protected function requestWillBeSentToPushoverWith($params): void
     {
         $multipartData = array_map(
-            fn ($key, $value) => ['name' => $key, 'contents' => $value],
+            fn($key, $value) => ['name' => $key, 'contents' => $value],
             array_keys($params),
             array_values($params)
         );
