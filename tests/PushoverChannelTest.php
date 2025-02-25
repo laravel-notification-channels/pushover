@@ -47,14 +47,15 @@ class PushoverChannelTest extends TestCase
     {
         $notifiable = new Notifiable;
 
-        $this->notification->shouldReceive('toPushover')
+        $this->notification
+            ->shouldReceive('toPushover')
             ->with($notifiable)
             ->andReturn($this->message);
 
-        $this->pushover->shouldReceive('send')
+        $this->pushover
+            ->shouldReceive('send')
             ->with(Mockery::subset([
                 'user' => 'pushover-key-30characters-long',
-                'device' => '',
             ]), $notifiable)
             ->once();
 
@@ -66,11 +67,13 @@ class PushoverChannelTest extends TestCase
     {
         $notifiable = new NotifiableWithPushoverReceiver;
 
-        $this->notification->shouldReceive('toPushover')
+        $this->notification
+            ->shouldReceive('toPushover')
             ->with($notifiable)
             ->andReturn($this->message);
 
-        $this->pushover->shouldReceive('send')
+        $this->pushover
+            ->shouldReceive('send')
             ->with(Mockery::subset([
                 'user' => 'pushover-key-30characters-long',
                 'device' => 'iphone,desktop',
