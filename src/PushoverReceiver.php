@@ -11,7 +11,7 @@ class PushoverReceiver
     /**
      * PushoverReceiver constructor.
      *
-     * @param string $key User or group key.
+     * @param  string  $key  User or group key.
      */
     protected function __construct(string $key)
     {
@@ -21,7 +21,7 @@ class PushoverReceiver
     /**
      * Create new Pushover receiver with an user key.
      *
-     * @param string $userKey Pushover user key.
+     * @param  string  $userKey  Pushover user key.
      * @return PushoverReceiver
      */
     public static function withUserKey(string $userKey): PushoverReceiver
@@ -32,7 +32,7 @@ class PushoverReceiver
     /**
      * Create new Pushover receiver with a group key.
      *
-     * @param string $groupKey Pushover group key.
+     * @param  string  $groupKey  Pushover group key.
      * @return PushoverReceiver
      */
     public static function withGroupKey(string $groupKey): PushoverReceiver
@@ -45,7 +45,7 @@ class PushoverReceiver
     /**
      * Send the message to a specific device.
      *
-     * @param array|string $device
+     * @param  array|string  $device
      * @return PushoverReceiver
      */
     public function toDevice(array|string $device): static
@@ -85,7 +85,7 @@ class PushoverReceiver
             'user' => $this->key,
         ];
 
-        if (!empty($this->devices)) {
+        if (! empty($this->devices)) {
             $data['device'] = implode(',', $this->devices);
         }
 
