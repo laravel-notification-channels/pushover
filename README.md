@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/pushover.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pushover)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/laravel-notification-channels/pushover/tests.yml?style=flat-square)](https://github.com/laravel-notification-channels/pushover/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/laravel-notification-channels/pushover/test.yml?style=flat-square)](https://github.com/laravel-notification-channels/pushover/actions)
 [![StyleCI](https://styleci.io/repos/65543497/shield)](https://styleci.io/repos/65543497)
 [![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/pushover.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pushover)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/pushover/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pushover/?branch=master)
@@ -132,6 +132,7 @@ public function routeNotificationForPushover() {
 | `normalPriority()`     | Sets the priority to normal. |
 | `highPriority()`       | Sets the priority to high. |
 | `emergencyPriority($retryTimeout, $expireAfter)` | Sets the priority to emergency and accepts integer values for the retry timeout and expiry time (in seconds). |
+| `callback($callbackUrl)` | Sets a publicly-accessible URL that Pushover will send a request to when the user has acknowledged your notification for an emergency notification. |
 
 ## Changelog
 
