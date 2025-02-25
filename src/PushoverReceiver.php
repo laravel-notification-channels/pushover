@@ -81,9 +81,18 @@ class PushoverReceiver
      */
     public function toArray(): array
     {
-        return array_merge([
+        $data = [
             'user' => $this->key,
-            'device' => implode(',', $this->devices),
-        ], $this->token ? ['token' => $this->token] : []);
+        ];
+
+        if (! empty($this->devices)) {
+            $data['device'] = implode(',', $this->devices);
+        }
+
+        if ($this->token) {
+            $data['token'] = $this->token;
+        }
+
+        return $data;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace NotificationChannels\Pushover\Test;
 
-use Illuminate\Contracts\Foundation\Application;
+use GuzzleHttp\Client as HttpClient;
 use Illuminate\Support\Facades\Config;
 use Mockery;
 use NotificationChannels\Pushover\Pushover;
@@ -15,30 +15,27 @@ class PushoverServiceProviderTest extends TestCase
     /** @var PushoverServiceProvider */
     protected $provider;
 
-    /** @var Application */
-    protected $app;
-
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->app = Mockery::mock(Application::class);
         $this->provider = new PushoverServiceProvider($this->app);
-
-        $this->app->shouldReceive('flush');
     }
 
     /** @test */
     public function it_gives_an_instantiated_pushover_object_when_the_channel_asks_for_it(): void
     {
         Config::shouldReceive('get')->with('services.pushover.token', null)->once()->andReturn('test-token');
+        Config::shouldReceive('get')->with('database.default')->andReturn('array');
+        Config::shouldReceive('get')->with('database.connections.array')->andReturn(['driver' => 'array']);
 
-        $this->app->shouldReceive('when')->with(PushoverChannel::class)->once()->andReturn($this->app);
-        $this->app->shouldReceive('needs')->with(Pushover::class)->once()->andReturn($this->app);
-        $this->app->shouldReceive('give')->with(Mockery::on(function ($pushover) {
-            return $pushover() instanceof Pushover;
-        }))->once();
+        $this->app->when(PushoverChannel::class)->needs(Pushover::class)->give(function () {
+            return new Pushover(Mockery::mock(HttpClient::class), 'test-token');
+        });
 
         $this->provider->boot();
+
+        $pushover = $this->app->get(PushoverChannel::class);
+        $this->assertInstanceOf(PushoverChannel::class, $pushover);
     }
 }
