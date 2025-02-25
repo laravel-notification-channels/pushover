@@ -84,7 +84,6 @@ class Pushover
                 }
             }
 
-            //dd($multipart);
             return $this->http->post(
                 $this->pushoverApiUrl,
                 [

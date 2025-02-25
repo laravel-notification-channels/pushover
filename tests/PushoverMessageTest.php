@@ -190,4 +190,13 @@ class PushoverMessageTest extends TestCase
 
         $this->assertEquals(2, $this->message->priority);
     }
+
+    public function it_can_set_the_callback_url(): void
+    {
+        $callbackUrl = 'https://www.example.com/callback';
+
+        $this->message->callback($callbackUrl);
+
+        $this->assertEquals($callbackUrl, $this->message->callback);
+    }
 }
