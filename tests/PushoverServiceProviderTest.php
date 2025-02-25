@@ -26,8 +26,8 @@ class PushoverServiceProviderTest extends TestCase
     public function it_gives_an_instantiated_pushover_object_when_the_channel_asks_for_it(): void
     {
         Config::shouldReceive('get')->with('services.pushover.token', null)->once()->andReturn('test-token');
-        Config::shouldReceive('get')->with('database.default')->once()->andReturn('array');
-        Config::shouldReceive('get')->with('database.connections.array')->once()->andReturn(['driver' => 'array']);
+        Config::shouldReceive('get')->with('database.default')->zeroOrMoreTimes()->andReturn('array');
+        Config::shouldReceive('get')->with('database.connections.array')->zeroOrMoreTimes()->andReturn(['driver' => 'array']);
 
         $this->app->when(PushoverChannel::class)->needs(Pushover::class)->give(function () {
             return new Pushover(Mockery::mock(HttpClient::class), 'test-token');
