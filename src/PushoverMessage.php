@@ -363,8 +363,8 @@ class PushoverMessage
             'image' => $this->image,
             'retry' => $this->retry,
             'expire' => $this->expire,
-            'html' => $this->format === static::FORMAT_HTML,
-            'monospace' => $this->format === static::FORMAT_MONOSPACE,
+            'html' => $this->format === static::FORMAT_HTML ? 1 : 0,
+            'monospace' => $this->format === static::FORMAT_MONOSPACE ? 1 : 0,
             'callback' => $this->callback,
         ];
     }
