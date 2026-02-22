@@ -10,13 +10,15 @@ jobs:
   test:
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
+
     runs-on: ubuntu-latest
+
 
     strategy:
       fail-fast: true
       matrix:
-        php: [ 8.4, 8.3, 8.2, 8.1 ]
-        laravel: [ '10.*', '11.*', '12.*' ]
+        php: [8.4, 8.3, 8.2, 8.1]
+        laravel: ['10.*', '11.*', '12.*', '13.*']
         include:
           - laravel: 10.*
             testbench: 8.*
@@ -24,15 +26,23 @@ jobs:
             testbench: 9.*
           - laravel: 12.*
             testbench: 10.*
+          - laravel: 13.*
+            testbench: 11.*
         exclude:
           - laravel: 11.*
             php: 8.1
           - laravel: 12.*
             php: 8.1
+          - laravel: 13.*
+            php: 8.2
+          - laravel: 13.*
+            php: 8.1
+
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
 
       - name: Set correct PHP version
         uses: shivammathur/setup-php@v2
@@ -40,10 +50,12 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: pcov
 
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --prefer-stable --prefer-dist --no-interaction --no-suggest
+
 
       - name: Execute tests
         run: vendor/bin/phpunit -c phpunit.xml.dist
@@ -51,22 +63,33 @@ jobs:
   test-legacy:
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
+
     runs-on: ubuntu-latest
+
 
     strategy:
       fail-fast: true
       matrix:
-        php: [ 8.4, 8.3, 8.2, 8.1 ]
-        laravel: [ '8.*', '9.*' ]
+        php: [8.4, 8.3, 8.2, 8.1]
+        laravel: ['8.*', '9.*', '13.*']
         include:
           - laravel: 8.*
             testbench: 6.*
           - laravel: 9.*
             testbench: 7.*
+          - laravel: 13.*
+            testbench: 11.*
+        exclude:
+          - laravel: 13.*
+            php: 8.2
+          - laravel: 13.*
+            php: 8.1
+
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
 
       - name: Set correct PHP version
         uses: shivammathur/setup-php@v2
@@ -74,11 +97,12 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: pcov
 
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --prefer-stable --prefer-dist --no-interaction --no-suggest
 
+
       - name: Execute tests
         run: vendor/bin/phpunit -c phpunit.xml.legacy.dist
-
