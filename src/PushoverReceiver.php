@@ -5,7 +5,7 @@ namespace NotificationChannels\Pushover;
 class PushoverReceiver
 {
     protected string $key;
-    protected string|null $token = null;
+    protected ?string $token = null;
     protected array $devices = [];
 
     /**

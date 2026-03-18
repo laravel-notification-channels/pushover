@@ -26,21 +26,21 @@ class PushoverMessage
      *
      * @var string|null
      */
-    public string|null $title = null;
+    public ?string $title = null;
 
     /**
      * The (optional) timestamp of the message.
      *
      * @var int|null
      */
-    public int|null $timestamp = null;
+    public ?int $timestamp = null;
 
     /**
      * The (optional) priority of the message.
      *
      * @var int|null
      */
-    public int|null $priority = null;
+    public ?int $priority = null;
 
     /**
      * The (optional) timeout between retries when sending a message
@@ -48,7 +48,7 @@ class PushoverMessage
      *
      * @var int|null
      */
-    public int|null $retry = null;
+    public ?int $retry = null;
 
     /**
      * The (optional) expire time of a message with an emergency priority.
@@ -56,42 +56,42 @@ class PushoverMessage
      *
      * @var int|null
      */
-    public int|null $expire = null;
+    public ?int $expire = null;
 
     /**
      * The (optional) supplementary url of the message.
      *
      * @var string|null
      */
-    public string|null $url = null;
+    public ?string $url = null;
 
     /**
      * The (optional) supplementary url title of the message.
      *
      * @var string|null
      */
-    public string|null $urlTitle = null;
+    public ?string $urlTitle = null;
 
     /**
      * The (optional) sound of the message.
      *
      * @var string|null
      */
-    public string|null $sound = null;
+    public ?string $sound = null;
 
     /**
      * The (optional) image to be attached to the message.
      *
      * @var string|null
      */
-    public string|null $image = null;
+    public ?string $image = null;
     /**
      * The (optional) publicly-accessible url that Pushover will use to notify your system when a user
      * acknowledges an Emergency notification.
      *
      * @var string|null
      */
-    public string|null $callback = null;
+    public ?string $callback = null;
 
     /**
      * Message formats.
@@ -257,7 +257,7 @@ class PushoverMessage
      *
      * @throws EmergencyNotificationRequiresRetryAndExpire
      */
-    public function priority(int $priority, int|null $retryTimeout = null, int|null $expireAfter = null): static
+    public function priority(int $priority, ?int $retryTimeout = null, ?int $expireAfter = null): static
     {
         $this->noEmergencyWithoutRetryOrExpire($priority, $retryTimeout, $expireAfter);
 
@@ -378,7 +378,7 @@ class PushoverMessage
      *
      * @throws EmergencyNotificationRequiresRetryAndExpire
      */
-    protected function noEmergencyWithoutRetryOrExpire(int $priority, int|null $retry, int|null $expire): void
+    protected function noEmergencyWithoutRetryOrExpire(int $priority, ?int $retry, ?int $expire): void
     {
         if ($priority === self::EMERGENCY_PRIORITY && ($retry === null || $expire === null)) {
             throw new EmergencyNotificationRequiresRetryAndExpire();
