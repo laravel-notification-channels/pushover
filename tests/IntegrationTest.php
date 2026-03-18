@@ -10,6 +10,7 @@ use NotificationChannels\Pushover\Pushover;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverMessage;
 use Orchestra\Testbench\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class IntegrationTest extends TestCase
 {
@@ -33,7 +34,14 @@ class IntegrationTest extends TestCase
         $this->ignoreEvents();
     }
 
-    /** @test */
+    protected function ignoreEvents(): void
+    {
+        $dispatcher = Mockery::mock('Illuminate\Contracts\Events\Dispatcher');
+        $dispatcher->shouldReceive('dispatch');
+        app()->instance('events', $dispatcher);
+    }
+
+    #[Test]
     public function it_can_send_a_pushover_notification_with_a_global_token(): void
     {
         $message = (new PushoverMessage('Message text'))
@@ -70,7 +78,22 @@ class IntegrationTest extends TestCase
         $channel->send(new NotifiableWithPushoverReceiver, $this->notification);
     }
 
-    /** @test */
+    protected function requestWillBeSentToPushoverWith($params): void
+    {
+        $multipartData = array_map(
+            fn($key, $value) => ['name' => $key, 'contents' => $value],
+            array_keys($params),
+            array_values($params)
+        );
+
+        $this->guzzleClient->shouldReceive('post')
+            ->with('https://api.pushover.net/1/messages.json', [
+                'multipart' => $multipartData,
+            ])
+            ->once();
+    }
+
+    #[Test]
     public function it_can_send_a_pushover_notification_with_an_overridden_token(): void
     {
         $message = (new PushoverMessage('Message <b>text</b>'))
@@ -106,27 +129,5 @@ class IntegrationTest extends TestCase
         $this->notification->shouldReceive('toPushover')->andReturn($message);
 
         $channel->send(new NotifiableWithPushoverReceiverWithToken(), $this->notification);
-    }
-
-    protected function requestWillBeSentToPushoverWith($params): void
-    {
-        $multipartData = array_map(
-            fn ($key, $value) => ['name' => $key, 'contents' => $value],
-            array_keys($params),
-            array_values($params)
-        );
-
-        $this->guzzleClient->shouldReceive('post')
-            ->with('https://api.pushover.net/1/messages.json', [
-                'multipart' => $multipartData,
-            ])
-            ->once();
-    }
-
-    protected function ignoreEvents(): void
-    {
-        $dispatcher = Mockery::mock('Illuminate\Contracts\Events\Dispatcher');
-        $dispatcher->shouldReceive('dispatch');
-        app()->instance('events', $dispatcher);
     }
 }

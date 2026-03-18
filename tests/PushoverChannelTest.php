@@ -12,6 +12,7 @@ use NotificationChannels\Pushover\Pushover;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverMessage;
 use Orchestra\Testbench\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PushoverChannelTest extends TestCase
 {
@@ -42,7 +43,7 @@ class PushoverChannelTest extends TestCase
         $this->message->shouldReceive('toArray')->andReturn([]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_send_a_message_to_pushover(): void
     {
         $notifiable = new Notifiable;
@@ -62,7 +63,7 @@ class PushoverChannelTest extends TestCase
         $this->channel->send($notifiable, $this->notification);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_send_a_message_to_pushover_using_a_pushover_receiver(): void
     {
         $notifiable = new NotifiableWithPushoverReceiver;
@@ -83,7 +84,7 @@ class PushoverChannelTest extends TestCase
         $this->channel->send($notifiable, $this->notification);
     }
 
-    /** @test */
+    #[Test]
     public function it_fires_a_notification_failed_event_when_the_communication_with_pushover_failed(): void
     {
         $this->notification->shouldReceive('toPushover')->andReturn($this->message);
@@ -98,7 +99,7 @@ class PushoverChannelTest extends TestCase
         $this->expectNotToPerformAssertions();
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_send_a_message_when_notifiable_does_not_have_route_notificaton_for_pushover(): void
     {
         $this->notification->shouldReceive('toPushover')->never();

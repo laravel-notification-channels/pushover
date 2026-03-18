@@ -4,18 +4,19 @@ namespace NotificationChannels\Pushover\Test;
 
 use NotificationChannels\Pushover\PushoverReceiver;
 use Orchestra\Testbench\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PushoverReceiverTest extends TestCase
 {
-    private $pushoverReceiver;
+    private PushoverReceiver $pushoverReceiver;
 
     public function setUp(): void
     {
         $this->pushoverReceiver = PushoverReceiver::withUserKey('pushover-key');
     }
 
-    /** @test */
-    public function it_can_set_up_a_receiver_with_an_user_key()
+    #[Test]
+    public function it_can_set_up_a_receiver_with_an_user_key(): void
     {
         $pushoverReceiver = PushoverReceiver::withUserKey('pushover-key');
 
@@ -24,8 +25,8 @@ class PushoverReceiverTest extends TestCase
         ], $pushoverReceiver->toArray());
     }
 
-    /** @test */
-    public function it_can_set_up_a_receiver_with_a_group_key()
+    #[Test]
+    public function it_can_set_up_a_receiver_with_a_group_key(): void
     {
         $pushoverReceiver = PushoverReceiver::withGroupKey('pushover-key');
 
@@ -34,8 +35,8 @@ class PushoverReceiverTest extends TestCase
         ], $pushoverReceiver->toArray());
     }
 
-    /** @test */
-    public function it_can_set_up_a_receiver_with_an_application_token()
+    #[Test]
+    public function it_can_set_up_a_receiver_with_an_application_token(): void
     {
         $pushoverReceiver = PushoverReceiver::withUserKey('pushover-key')->withApplicationToken('pushover-token');
 
@@ -45,8 +46,8 @@ class PushoverReceiverTest extends TestCase
         ], $pushoverReceiver->toArray());
     }
 
-    /** @test */
-    public function it_only_exposes_app_token_when_set()
+    #[Test]
+    public function it_only_exposes_app_token_when_set(): void
     {
         $pushoverReceiverUserKey = PushoverReceiver::withUserKey('pushover-key');
         $pushoverReceiverGroupKey = PushoverReceiver::withGroupKey('pushover-key');
@@ -55,8 +56,8 @@ class PushoverReceiverTest extends TestCase
         $this->assertArrayNotHasKey('token', $pushoverReceiverGroupKey->toArray());
     }
 
-    /** @test */
-    public function it_can_add_a_single_device_to_the_receiver()
+    #[Test]
+    public function it_can_add_a_single_device_to_the_receiver(): void
     {
         $this->pushoverReceiver->toDevice('iphone');
 
@@ -66,8 +67,8 @@ class PushoverReceiverTest extends TestCase
         ], $this->pushoverReceiver->toArray());
     }
 
-    /** @test */
-    public function it_can_add_multiple_devices_to_the_receiver()
+    #[Test]
+    public function it_can_add_multiple_devices_to_the_receiver(): void
     {
         $this->pushoverReceiver
             ->toDevice('iphone')
@@ -80,8 +81,8 @@ class PushoverReceiverTest extends TestCase
         ], $this->pushoverReceiver->toArray());
     }
 
-    /** @test */
-    public function it_can_add_an_array_of_devices_to_the_receiver()
+    #[Test]
+    public function it_can_add_an_array_of_devices_to_the_receiver(): void
     {
         $this->pushoverReceiver->toDevice(['iphone', 'desktop', 'macbook']);
 

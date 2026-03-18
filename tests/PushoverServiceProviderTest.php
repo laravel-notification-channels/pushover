@@ -9,11 +9,11 @@ use NotificationChannels\Pushover\Pushover;
 use NotificationChannels\Pushover\PushoverChannel;
 use NotificationChannels\Pushover\PushoverServiceProvider;
 use Orchestra\Testbench\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PushoverServiceProviderTest extends TestCase
 {
-    /** @var PushoverServiceProvider */
-    protected $provider;
+    protected PushoverServiceProvider $provider;
 
     public function setUp(): void
     {
@@ -22,7 +22,7 @@ class PushoverServiceProviderTest extends TestCase
         $this->provider = new PushoverServiceProvider($this->app);
     }
 
-    /** @test */
+    #[Test]
     public function it_gives_an_instantiated_pushover_object_when_the_channel_asks_for_it(): void
     {
         Config::shouldReceive('get')->with('services.pushover.token', null)->once()->andReturn('test-token');
