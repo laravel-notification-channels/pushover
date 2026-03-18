@@ -3,11 +3,12 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          cacheDirectory=".phpunit.cache"
+         cacheResult="false"
          executionOrder="depends,defects"
          beStrictAboutOutputDuringTests="true"
          displayDetailsOnPhpunitDeprecations="true"
-         failOnRisky="true">
-
+         failOnRisky="true"
+         testdox="false">
     <testsuites>
         <testsuite name="Laravel Pushover Notifications Test Suite">
             <directory suffix="Test.php">tests</directory>

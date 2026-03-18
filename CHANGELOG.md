@@ -2,6 +2,16 @@
 
 All notable changes to `pushover` will be documented in this file.
 
+## 5.0.0 - 2026-03-18
+- High-Impact changes
+  - This release drops support for PHP 8.1 and Laravel v10 and below, as those versions are EOL.
+- Other Changes
+  - Support for Laravel 13
+  - Support for PHP 8.5
+
+## 4.1.2 - 2025-09-09
+- Support for monospace and HTML parameters by @nicolasbeauvais in #68
+
 ## 4.1.0 - 2025-02-25
 - Add support for Laravel 12
 - Add new callback parameter which can be used to supply a callback URL for emergency notifications by @stijnbernards in #64
