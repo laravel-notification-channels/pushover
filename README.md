@@ -37,11 +37,11 @@ composer require laravel-notification-channels/pushover
 This package supports various versions of Laravel and PHP with different releases. Choose the correct package version for your project.
 Please note that older versions of this package are no longer being updated.
 
-| Package Version | Laravel Version | PHP Version | Status |
-|-----------------|-----------------|-------------|--------|
-| 3.x             | 8 - 10          | 8.0 - 8.3   | EOL    |
-| 4.x             | 8 - 12          | 8.1 - 8.4   | EOL    |
-| 5.x             | 11 - 13         | 8.2 - 8.5   | Active |
+| Package Version | Laravel Version | PHP Version | Status                |
+|-----------------|-----------------|-------------|-----------------------|
+| 3.x             | 8 - 10          | 8.0 - 8.3   | EOL                   |
+| 4.x             | 8 - 12          | 8.1 - 8.4   | Security patches only |
+| 5.x             | 11 - 13         | 8.2 - 8.5   | Active                |
 
 
 ### Setting up your Pushover account
