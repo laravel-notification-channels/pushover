@@ -2,7 +2,7 @@
 
 namespace NotificationChannels\Pushover;
 
-use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use NotificationChannels\Pushover\Exceptions\EmergencyNotificationRequiresRetryAndExpire;
 
 class PushoverMessage
@@ -191,12 +191,12 @@ class PushoverMessage
     /**
      * Set the time of the Pushover message.
      *
-     * @param  int|Carbon  $time
+     * @param  int|CarbonInterface  $time
      * @return $this
      */
-    public function time(int|Carbon $time): static
+    public function time(int|CarbonInterface $time): static
     {
-        if ($time instanceof Carbon) {
+        if ($time instanceof CarbonInterface) {
             $time = (int) $time->timestamp;
         }
 
