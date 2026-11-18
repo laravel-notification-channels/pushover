@@ -4,6 +4,7 @@ namespace NotificationChannels\Pushover\Test;
 
 use Exception;
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\RequestException;
 use Mockery;
 use NotificationChannels\Pushover\Exceptions\CouldNotSendNotification;
@@ -87,7 +88,7 @@ class PushoverTest extends TestCase
         $guzzleResponse->shouldReceive('getStatusCode')->andReturn(400);
         $guzzleResponse->shouldReceive('getBody->getContents');
 
-        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException('message', $guzzleRequest,
+        $this->guzzleClient->shouldReceive('post')->andThrow(new BadResponseException('message', $guzzleRequest,
             $guzzleResponse));
 
         $this->pushover->send([], new Notifiable());
@@ -104,7 +105,7 @@ class PushoverTest extends TestCase
         $guzzleResponse->shouldReceive('getStatusCode')->andReturn(400);
         $guzzleResponse->shouldReceive('getBody->getContents')->andReturn('{"errors": ["error_message_1", "error_message_2"]}');
 
-        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException('message', $guzzleRequest,
+        $this->guzzleClient->shouldReceive('post')->andThrow(new BadResponseException('message', $guzzleRequest,
             $guzzleResponse));
 
         $this->pushover->send([], new Notifiable());
@@ -118,7 +119,7 @@ class PushoverTest extends TestCase
 
         $guzzleRequest = Mockery::mock(RequestInterface::class);
 
-        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException('message', $guzzleRequest, null));
+        $this->guzzleClient->shouldReceive('post')->andThrow(new RequestException('message', $guzzleRequest));
 
         $this->pushover->send([], new Notifiable());
     }
