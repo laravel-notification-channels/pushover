@@ -91,10 +91,11 @@ class Pushover
                 ]
             );
         } catch (RequestException $exception) {
-            if ($exception->getResponse()) {
-                throw CouldNotSendNotification::serviceRespondedWithAnError(
-                    $exception->getResponse(), $notifiable
-                );
+            // Guzzle 8 only exposes getResponse() on ResponseException, a subclass of RequestException.
+            $response = method_exists($exception, 'getResponse') ? $exception->getResponse() : null;
+
+            if ($response) {
+                throw CouldNotSendNotification::serviceRespondedWithAnError($response, $notifiable);
             }
             throw ServiceCommunicationError::communicationFailed($exception);
         } catch (Exception $exception) {
