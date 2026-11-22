@@ -94,6 +94,14 @@ class PushoverMessage
     public ?string $callback = null;
 
     /**
+     * The (optional) time to live of the message in seconds, after which
+     * the message is deleted from the devices it was delivered to.
+     *
+     * @var int|null
+     */
+    public ?int $ttl = null;
+
+    /**
      * Message formats.
      */
     public const FORMAT_PLAIN = 0;
@@ -346,6 +354,20 @@ class PushoverMessage
     }
 
     /**
+     * Set the time to live in seconds, after which the message is deleted from
+     * the devices it was delivered to. Ignored for emergency priority messages.
+     *
+     * @param  int  $seconds
+     * @return $this
+     */
+    public function ttl(int $seconds): static
+    {
+        $this->ttl = $seconds;
+
+        return $this;
+    }
+
+    /**
      * Array representation of Pushover Message.
      *
      * @return array
@@ -366,6 +388,7 @@ class PushoverMessage
             'html' => $this->format === static::FORMAT_HTML ? 1 : 0,
             'monospace' => $this->format === static::FORMAT_MONOSPACE ? 1 : 0,
             'callback' => $this->callback,
+            'ttl' => $this->ttl,
         ];
     }
 

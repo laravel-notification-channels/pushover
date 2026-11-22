@@ -44,6 +44,8 @@ Please note that older versions of this package are no longer being updated.
 | 5.x             | 11 - 13         | 8.2 - 8.5   | Security patches only |
 | 6.x             | 12 - 13         | 8.3 - 8.6   | Active                |
 
+Note: PHP 8.6 is only supported with Laravel 13, as Laravel 12 does not run on PHP 8.6.
+
 
 ### Setting up your Pushover account
 
@@ -146,6 +148,7 @@ public function routeNotificationForPushover() {
 | `highPriority()`                                     | Sets the priority to high. |
 | `emergencyPriority($retryTimeout, $expireAfter)`     | Sets the priority to emergency and accepts integer values for the retry timeout and expiry time (in seconds). |
 | `callback($callbackUrl)`                             | Sets a publicly-accessible URL that Pushover will send a request to when the user has acknowledged your notification for an emergency notification. |
+| `ttl($seconds)`                                      | Accepts an integer value for the [time to live](https://pushover.net/api#ttl) in seconds, after which the message is automatically deleted from the devices it was delivered to. Ignored for emergency priority messages. |
 
 ## Changelog
 

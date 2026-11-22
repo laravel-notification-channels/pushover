@@ -7,6 +7,7 @@ All notable changes to `pushover` will be documented in this file.
   - This release drops support for PHP 8.2 and Laravel 11, as those versions are EOL.
 - Other Changes
   - Support for PHP 8.6
+  - Add `ttl()` method to set the time to live of a message (#71)
 
 ## 5.0.1 - 2026-05-31
 - `time()` accepts both Carbon and CarbonImmutable by @boryn in #70

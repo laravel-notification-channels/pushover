@@ -65,6 +65,7 @@ class IntegrationTest extends TestCase
             'html' => false,
             'monospace' => false,
             'callback' => null,
+            'ttl' => null,
             'user' => 'pushover-key-30characters-long',
             'device' => 'iphone,desktop',
         ]);
@@ -118,6 +119,7 @@ class IntegrationTest extends TestCase
             'html' => true,
             'monospace' => false,
             'callback' => null,
+            'ttl' => null,
             'user' => 'pushover-key-30characters-long',
             'device' => 'iphone,desktop',
         ]);
