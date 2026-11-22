@@ -40,8 +40,9 @@ Please note that older versions of this package are no longer being updated.
 | Package Version | Laravel Version | PHP Version | Status                |
 |-----------------|-----------------|-------------|-----------------------|
 | 3.x             | 8 - 10          | 8.0 - 8.3   | EOL                   |
-| 4.x             | 8 - 12          | 8.1 - 8.4   | Security patches only |
-| 5.x             | 11 - 13         | 8.2 - 8.5   | Active                |
+| 4.x             | 8 - 12          | 8.1 - 8.4   | EOL                   |
+| 5.x             | 11 - 13         | 8.2 - 8.5   | Security patches only |
+| 6.x             | 12 - 13         | 8.3 - 8.6   | Active                |
 
 
 ### Setting up your Pushover account

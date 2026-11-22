@@ -8,8 +8,9 @@ Please note that older versions of this package are no longer being updated.
 | Package Version | Status                |
 |-----------------|-----------------------|
 | 3.x             | EOL                   |
-| 4.x             | Security patches only |
-| 5.x             | Active                |
+| 4.x             | EOL                   |
+| 5.x             | Security patches only |
+| 6.x             | Active                |
 
 ## Reporting a Vulnerability
 
