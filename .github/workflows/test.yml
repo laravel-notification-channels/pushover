@@ -14,24 +14,17 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.2, 8.3, 8.4, 8.5]
-        laravel: ['11.*', '12.*', '13.*']
+        php: [8.3, 8.4, 8.5, 8.6]
+        laravel: ['12.*', '13.*']
         include:
-          - laravel: 11.*
-            testbench: 9.*
           - laravel: 12.*
             testbench: 10.*
           - laravel: 13.*
             testbench: 11.*
-        exclude:
-          - laravel: 11.*
-            php: 8.5
-          - laravel: 13.*
-            php: 8.2
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Set correct PHP version
         uses: shivammathur/setup-php@v2
@@ -42,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --prefer-stable --prefer-dist --no-interaction --no-suggest
+          composer update --prefer-stable --prefer-dist --no-interaction
 
       - name: Execute tests
         run: vendor/bin/phpunit -c phpunit.xml.dist

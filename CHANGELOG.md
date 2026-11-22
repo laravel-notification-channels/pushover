@@ -2,6 +2,15 @@
 
 All notable changes to `pushover` will be documented in this file.
 
+## 6.0.0 - 2026-11-22
+- High-Impact changes
+  - This release drops support for PHP 8.2 and Laravel 11, as those versions are EOL.
+- Other Changes
+  - Support for PHP 8.6
+
+## 5.0.1 - 2026-05-31
+- `time()` accepts both Carbon and CarbonImmutable by @boryn in #70
+
 ## 5.0.0 - 2026-03-18
 - High-Impact changes
   - This release drops support for PHP 8.1 and Laravel v10 and below, as those versions are EOL.
